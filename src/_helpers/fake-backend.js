@@ -1,8 +1,12 @@
+// 가상 back-end 라.. 나중엔 삭제하면 될듯
+
 // array in local storage for registered users
+// user 정보를 get 함... back-end 붙일 경우, 뭔가 공통으로 빼내야 할 것 같음
 let users = JSON.parse(localStorage.getItem('users')) || [];
     
 export function configureFakeBackend() {
     let realFetch = window.fetch;
+    console.log("@@@@  언제 여리고 오냐 ?!!" );
     window.fetch = function (url, opts) {
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call

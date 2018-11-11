@@ -11,17 +11,23 @@ export const userService = {
     delete: _delete
 };
 
+// login 함수
 function login(username, password) {
+
+    // vue 의 fetch 를 이용하던지, axios 를 이용하던지
+    // post 방식으로 login 처리를 한다.
     const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        method: 'POST', // post 방식
+        headers: { 'Content-Type': 'application/json' }, // json 형태
+        body: JSON.stringify({ username, password }) // body 는 username/password
     };
 
+    // 서버의 authenticate 를 호출
     return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a jwt token in the response
+            console.log(user);
             if (user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -42,7 +48,8 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-
+    console.log("register start");
+    console.log(`${config.apiUrl}/users/register`);
     return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 

@@ -1,5 +1,6 @@
 import { userService } from '../_services';
 import { router } from '../_helpers';
+import { axios } from 'axios';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const state = user
@@ -15,16 +16,19 @@ const actions = {
                 user => {
                     commit('loginSuccess', user);
                     router.push('/');
+                    //axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
                 },
                 error => {
                     commit('loginFailure', error);
                     dispatch('alert/error', error, { root: true });
+                    //axios.defaults.headers.common['Authorization'] = undefined;
                 }
             );
     },
     logout({ commit }) {
         userService.logout();
         commit('logout');
+        //axios.defaults.headers.common['Authorization'] = undefined;
     },
     register({ dispatch, commit }, user) {
         commit('registerRequest', user);
