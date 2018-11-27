@@ -1,9 +1,12 @@
 <template>
   <div>
+    <GetTodo></GetTodo>
     <CurrentTodos></CurrentTodos>
     <CompletedTodos></CompletedTodos>
-    <GetTodo></GetTodo>
-    <p>{{ user }}</p>
+    <p>
+      <router-link to="/login">Logout</router-link>
+    </p>
+    <!--<p>{{ user }}</p>-->
   </div>
 </template>
 <script>

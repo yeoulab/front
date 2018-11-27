@@ -10,7 +10,8 @@ import axios from 'axios';
 
 
 export const todosService = {
-    createTodo
+    createTodo,
+    getByUserId
 };
 
 let user = {};
@@ -30,4 +31,25 @@ function getUserToken(){
   user = JSON.parse(localStorage.getItem('user'));
   console.log(user);
   return user.token;
+}
+
+function getByUserId(id) {
+    console.log("getByUserId Start")
+    token = getUserToken();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    return axios.get(`${config.apiUrl}/todos/${id}`)
+    .then((response) => {
+        console.log("response.data ↓↓↓↓↓↓");
+        console.log(response.data);
+        return response.data;
+    });
+}
+
+function completeTodo(todo) {
+    console.log("completeTodo start");
+    token = getUserToken();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+    return axios.post(`${config.apiUrl}/todos/create`, {todo})
+    .then().catch();
 }

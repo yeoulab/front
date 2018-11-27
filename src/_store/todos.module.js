@@ -14,6 +14,13 @@ const mutations = {
       GET_TODO(state, todo){
         state.newTodo = todo
       },
+      LIST_TODO(state, todo){
+        state.todos.push({
+          body: todo.body,
+          completed: todo.completed,
+          todoId: todo.todoId,
+        })
+      },
       ADD_TODO(state){
         state.todos.push({
           body: state.newTodo,
@@ -42,13 +49,33 @@ const actions = {
       getTodo({commit}, todo){
         commit('GET_TODO', todo)
       },
+      searchTodo({commit}, id){
+
+        console.log("searchTodo STart : " + id);
+
+        let todoById = {
+          body: '',
+          completed: '',
+          todoId: ''
+        }
+        todosService.getByUserId(id)
+        .then((response) => {
+          for( var i = 0 ; i < response.length ; i++ ){
+            console.log(response[i].todoName);
+            todoById.body = response[i].todoName;
+            todoById.completed = false;
+            todoById.todoId = response[i]._id;
+            commit('LIST_TODO', todoById);
+          }
+        })
+      },
       addTodo({commit}, todo){
         //commit('registerRequest', user);
     
         todosService.createTodo(todo)
             .then(
               todo => {
-                commit('ADD_TODO', todo);
+                commit('ADD_TODO');
                     //router.push('/login');
                     //setTimeout(() => {
                     //    // display success message after route change completes

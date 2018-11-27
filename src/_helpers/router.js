@@ -32,12 +32,6 @@ router.beforeEach((to, from, next) => {
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
 
-  console.log("to");
-  console.log(to);
-  console.log("from");
-  console.log(from);
-  console.log("next");
-  console.log(next);
   // 로그인이 안된경우, 무조건 /login 으로 렌더링
   if (authRequired && !loggedIn) {
     return next('/login');

@@ -11,8 +11,8 @@ Vue.use(VeeValidate);
 // import { configureFakeBackend } from './_helpers';
 // configureFakeBackend();
 
-new Vue({
-    el: '#app',
+new Vue({    
+    el: '#app',    
     router,
     store,
     render: h => h(App)
