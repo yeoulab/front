@@ -2,11 +2,10 @@
     <div id="get-todo" class="container">
         <!-- :value 를 쓸 경우, computed 의 ...mapState 를 설정해주면 됨 
              v-model 은 get/set 이 있어야 함 -->
-        <input class="form-control"
-               v-model="newTodo"
-               @change="getTodo"
-               placeholder="I need to...">
-        <button class="btn btn-primary" @click="addTodo">Add Todo</button>
+        <b-input-group>
+            <b-form-input type="text" v-model="newTodo" @change="getTodo" placeholder="새로운 할 일"></b-form-input>
+            <b-button class="btn btn-default btn-sm" @click="addTodo">+</b-button>
+        </b-input-group>
     </div>
 </template>
 <script>
@@ -54,3 +53,8 @@
         }
 }
 </script>
+<style>
+/* input {
+  font-family: "Courier New", Times, serif;
+} */
+</style>

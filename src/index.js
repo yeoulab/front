@@ -4,12 +4,61 @@ import VeeValidate from 'vee-validate';
 import { store } from './_store';
 import { router } from './_helpers';
 import App from './app/App';
+import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(VeeValidate);
+Vue.use(BootstrapVue);
 
 // setup fake backend
 // import { configureFakeBackend } from './_helpers';
 // configureFakeBackend();
+
+// =================================================================================
+// google api 의 client libaray 와 Oauth2 의 라이브러리를 load한다.
+// gapi.client.init 에서 auth2 library 를 로드하기 때문에 optional 한 파라미터다.
+// https://www.googleapis.com/auth/userinfo.profile
+// https://www.googleapis.com/auth/contacts.readonly
+// https://www.googleapis.com/auth/calendar.readonly 
+gapi.load('client:auth2', () => {
+    gapi.client.init({
+        apiKey: 'AIzaSyAwgiVKcVyhuDkNb6UVCv5UM296fH73vu8',
+        discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
+        clientId: '266701870310-nt5rnr20s11ssvur86t4imndpk0un94j.apps.googleusercontent.com',
+        scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/calendar.readonly'// https://www.googleapis.com/auth/contacts.readonly' // https://www.googleapis.com/auth/contacts.readonly
+    }).then( () => {
+        // Listen for sign-in state changes.
+        console.log("@@@");
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        console.log("###");
+        console.log(gapi.auth2.getAuthInstance().isSignedIn.get());
+        // Handle the initial sign-in state.
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    })
+}); 
+
+function updateSigninStatus(isSignedIn) {
+    // When signin status changes, this function is called.
+    // If the signin status is changed to signedIn, we make an API call.
+    console.log("isSignedIn : " + isSignedIn);
+    if (isSignedIn) {
+        console.log("makeApiCall Start");
+        makeApiCall();
+    }
+}
+
+function makeApiCall() {
+    // Make an API call to the People API, and print the user's given name.
+    gapi.client.people.people.get({
+        'resourceName': 'people/me',
+        'requestMask.includeField': 'person.names'
+    }).then(function(response) {
+        console.log(response);
+        console.log('Hello, ' + response.result.names[0].givenName);
+    }, function(reason) {
+        console.log('Error: ' + reason.result.error.message);
+    });
+}  
+// =================================================================================
 
 new Vue({    
     el: '#app',    

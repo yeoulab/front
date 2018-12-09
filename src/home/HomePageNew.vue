@@ -1,7 +1,10 @@
 <template>
   <div>
+    <TodoDate></TodoDate>
     <GetTodo></GetTodo>
+    <br>
     <CurrentTodos></CurrentTodos>
+    <br>
     <CompletedTodos></CompletedTodos>
     <p>
       <router-link to="/login">Logout</router-link>
@@ -13,13 +16,15 @@
 import GetTodo from './todo/GetTodo.vue'
 import CurrentTodos from './todo/CurrentTodos.vue'
 import CompletedTodos from './todo/CompletedTodos.vue'
+import TodoDate from './todo/TodoDate.vue'
 import { mapState } from 'vuex';
 
 export default {  
   components: {
     GetTodo,
     CurrentTodos,
-    CompletedTodos
+    CompletedTodos,
+    TodoDate,
   },
   computed: {
     ...mapState({

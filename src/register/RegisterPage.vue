@@ -28,6 +28,7 @@
                 <router-link to="/login" class="btn btn-link">Cancel</router-link>
             </div>
         </form>
+        <button id="signin-button" @click="handleSignInClick()">구글로 회원가입</button>
     </div>
 </template>
 
@@ -58,7 +59,49 @@ export default {
                     this.register(this.user);
                 }
             });
-        }
+        },
+        handleSignInClick(event) {
+            // Ideally the button should only show up after gapi.client.init finishes, so that this
+            // handler won't be called before OAuth is initialized.
+            // login 을 한다.
+            console.log("this.submitted : " + this.submitted);
+
+            var that = this;
+
+            gapi.auth2.getAuthInstance().signIn()
+                .then(() => {
+                    // Make an API call to the People API, and print the user's given name.
+                    gapi.client.people.people.get({
+                        'resourceName': 'people/me',
+                        'requestMask.includeField': 'person.names'
+                    }).then(function(response) {
+                        console.log('Register 에서 호출');
+                        console.log('Hello, ' + response.result.names[0].givenName);
+
+                        window.setTimeout( () => {
+                            console.log("that.firstName", that.firstName);
+                            that.submitted      = true;
+                            that.user.firstName = response.result.names[0].familyName;
+                            that.user.lastName  = response.result.names[0].givenName;
+                            that.user.username  = response.result.names[0].metadata.source.id;
+                            that.user.password  = response.result.names[0].metadata.source.id;
+
+                            that.register(that.user);
+                        }, 1000 );
+                        // submitted      = true;
+                        // user.firstName = response.result.names[0].familyName;
+                        // user.lastName  = response.result.names[0].givenName;
+                        // user.username  = response.result.names[0].metadata.source.id;
+                        // user.password  = response.result.names[0].metadata.source.id;
+                        // // this.submitted      = true;
+                        // console.log(user);
+                        // this.register(user);
+                    }, function(reason) {
+                        console.log('Error: ' + reason.result.error.message);
+                    });
+                });
+            
+        },
     }
 };
 </script>
