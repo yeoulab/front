@@ -1,6 +1,6 @@
 <template>
     <div id="current-todos" class="container">
-        <h3 v-if="todos.length > 0">Current({{todos.length}})</h3>
+        <h6 v-if="todos.length > 0">할 일({{todos.length}})</h6>
         <ul class="list-group">
             <li class="list-group-item" v-for="todo in todos" :key="todo.id">
                 {{todo.body}}

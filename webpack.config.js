@@ -20,14 +20,18 @@ module.exports = {
         rules: [
             {
                 test: /\.vue?$/,
-                exclude: /(node_modules)/,
-                use: 'vue-loader'
+                use: 'vue-loader',
+                exclude: /node_modules/
             },
             {
-                test: /\.js?$/,
-                exclude: /(node_modules)/,
-                use: 'babel-loader'
-            }
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader'
+            },
         ]
     },
     plugins: [

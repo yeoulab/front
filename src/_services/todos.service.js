@@ -11,7 +11,8 @@ import axios from 'axios';
 
 export const todosService = {
     createTodo,
-    getByUserId
+    getByUserId,
+    completeTodo
 };
 
 let user = {};
@@ -53,3 +54,4 @@ function completeTodo(todo) {
     return axios.post(`${config.apiUrl}/todos/create`, {todo})
     .then().catch();
 }
+
