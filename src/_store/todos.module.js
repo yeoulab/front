@@ -5,9 +5,14 @@
 //-----------------------------------------------------
 import { todosService } from '../_services';
 
+var todoToday = new Date().toISOString().slice(0,10);
+console.log("todos.module.js - todoDay : " + todoToday);
+// document.getElementById("todoDate").value = res;
+
 const state = {
       todos: [],
-      newTodo: ''
+      newTodo: '',
+      todoDate: todoToday,
     }
     
 const mutations = {
@@ -42,6 +47,10 @@ const mutations = {
       },
       CLEAR_TODO(state){
         state.newTodo = ''
+      },
+      SET_DATE(state, dt){
+        console.log(dt);
+        state.todoDate = dt;
       }
      }
 
@@ -50,9 +59,6 @@ const actions = {
         commit('GET_TODO', todo)
       },
       searchTodo({commit}, id){
-
-        console.log("searchTodo STart : " + id);
-
         let todoById = {
           body: '',
           completed: '',
@@ -97,10 +103,18 @@ const actions = {
         commit('REMOVE_TODO', todo)
       },
       completeTodo({commit}, todo){
-       commit('COMPLETE_TODO', todo)
+        todosService.completeTodo(todo)
+          .then(
+
+          );
+        commit('COMPLETE_TODO', todo)
       },
       clearTodo({commit}){
         commit('CLEAR_TODO')
+      },
+      setTodoDate({commit}, dt){
+        console.log("dt : " + dt);
+        commit('SET_DATE', dt);
       }
    }
 

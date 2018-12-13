@@ -21,12 +21,12 @@ module.exports = {
             {
                 test: /\.vue?$/,
                 use: 'vue-loader',
-                exclude: /node_modules/
+                // exclude: /node_modules/
             },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/
+                // exclude: /node_modules/
             },
             {
                 test: /\.css$/,

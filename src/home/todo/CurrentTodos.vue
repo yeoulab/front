@@ -42,8 +42,6 @@ export default {
         }
     },
     created() {
-        console.log('CurrentTodos => created');
-        console.log("user._id : " + this.user._id);
         this.searchTodo(this.user._id);
     },
     methods: {
@@ -53,9 +51,10 @@ export default {
             remove: 'removeTodo',
             searchTodo: 'searchTodo',
         }),
-        completeTodo(){
-            this.inpTodo.todoName = this.todo.todoName;
-            this.inpTodo.todoId = this.todo.todoId;
+        completeTodo(todo){
+            console.log(todo);
+            this.inpTodo.todoName = todo.body;
+            this.inpTodo.todoId = todo.todoId;
             this.inpTodo.userId = this.user._id;
             this.complete(this.inpTodo);
         }
@@ -73,6 +72,7 @@ export default {
         ...mapState({
             todos: state => state.todos.todos,
             user: state => state.account.user,
+            todoDate: state => state.todos.todoDate,
         })
         // todos(){
         //     return this.$store.getters.todos
