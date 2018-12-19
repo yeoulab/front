@@ -40,7 +40,7 @@
         },
         computed: {
             ...mapState({
-                user: state => state.account.user
+                user: state => state.account.user,
             }),
             newTodo:{
                 get() {

@@ -8,11 +8,11 @@ import config from 'config';
 import { authHeader } from '../_helpers';
 import axios from 'axios';
 
-
 export const todosService = {
     createTodo,
     getByUserId,
-    completeTodo
+    completeTodo,
+    getCompleteByUserId,
 };
 
 let user = {};
@@ -40,8 +40,6 @@ function getByUserId(id) {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     return axios.get(`${config.apiUrl}/todos/${id}`)
     .then((response) => {
-        console.log("response.data ↓↓↓↓↓↓");
-        console.log(response.data);
         return response.data;
     });
 }
@@ -51,7 +49,20 @@ function completeTodo(todo) {
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-    return axios.post(`${config.apiUrl}/todos/create`, {todo})
+    return axios.post(`${config.apiUrl}/todos/complete`, {todo})
     .then().catch();
 }
 
+// user 의 complete 된 todo list
+function getCompleteByUserId(id, dt){
+    console.log("getCompleteByUserId");
+    token = getUserToken();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+    return axios.get(`${config.apiUrl}/todos/${id}/${dt}`)
+    .then((response) => {
+        console.log("response.data ↓↓↓↓↓↓");
+        console.log(response.data);
+        return response.data;
+    });
+}
