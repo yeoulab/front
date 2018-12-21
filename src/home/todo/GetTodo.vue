@@ -3,7 +3,7 @@
         <!-- :value 를 쓸 경우, computed 의 ...mapState 를 설정해주면 됨 
              v-model 은 get/set 이 있어야 함 -->
         <b-input-group>
-            <b-form-input type="text" v-model="newTodo" @change="getTodo" placeholder="새로운 할 일"></b-form-input>
+            <b-form-input type="text" v-model="newTodo" placeholder="새로운 할 일"></b-form-input>
             <b-button class="btn btn-default btn-sm" @click="addTodo">+</b-button>
         </b-input-group>
     </div>
@@ -18,16 +18,18 @@
             return{
                 todo: {
                     todoName: '',
-                    userId: ''
+                    userId: '',
+                    completed: false,
                 }
             }
         },
         methods: {
             getTodo(e){
-                this.$store.commit('todos/GET_TODO', e.target.value)
+                console.log(this.newTodo);
+                this.$store.commit('todos/GET_TODO', this.newTodo)
             },
             ...mapActions('todos', {
-                createTodo: 'addTodo'
+                createTodo: 'addTodo',
             }),
             addTodo(){
                 this.todo.todoName = this.newTodo;

@@ -24,14 +24,14 @@ function createTodo(todo) {
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-    return axios.post(`${config.apiUrl}/todos/create`, {todo})
-    .then().catch();
+    return axios.post(`${config.apiUrl}/todos/create`, { todo })
+        .then().catch();
 }
 
-function getUserToken(){
-  user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
-  return user.token;
+function getUserToken() {
+    user = JSON.parse(localStorage.getItem('user'));
+    // console.log(user);
+    return user.token;
 }
 
 function getByUserId(id) {
@@ -39,30 +39,32 @@ function getByUserId(id) {
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     return axios.get(`${config.apiUrl}/todos/${id}`)
-    .then((response) => {
-        return response.data;
-    });
+        .then((response) => {
+            return response.data;
+        });
 }
 
 function completeTodo(todo) {
     console.log("completeTodo start");
     token = getUserToken();
+    todo.completedDate = todo.completedDate.replace(/-/gi, "");
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-    return axios.post(`${config.apiUrl}/todos/complete`, {todo})
-    .then().catch();
+    return axios.post(`${config.apiUrl}/complete`, { todo })
+        .then().catch();
 }
 
 // user 의 complete 된 todo list
-function getCompleteByUserId(id, dt){
+function getCompleteByUserId(id, dt) {
     console.log("getCompleteByUserId");
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    dt = dt.replace(/-/gi, "");
 
-    return axios.get(`${config.apiUrl}/todos/${id}/${dt}`)
-    .then((response) => {
-        console.log("response.data ↓↓↓↓↓↓");
-        console.log(response.data);
-        return response.data;
-    });
+    return axios.get(`${config.apiUrl}/complete/${id}/${dt}`)
+        .then((response) => {
+            console.log("response.data ↓↓↓↓↓↓");
+            console.log(response.data);
+            return response.data;
+        });
 }

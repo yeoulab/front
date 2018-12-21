@@ -1,6 +1,6 @@
 <template>
     <div id="todo-date" class="container">
-        <b-form-input type="date" id ="todoDate" v-model="stdDate"></b-form-input>
+        <b-form-input type="date" id ="todoDate" aira-invalid="true" v-model="stdDate" @change="refreshTodo"></b-form-input>
     </div>
 </template>
 <script>
@@ -26,7 +26,7 @@
             console.log("todoDate Vue updated called");
         },
         methods: {
-            
+            ...mapActions('todos', {refreshTodo: 'searchTodo'}),
         },
         computed: {
             // ...mapState({

@@ -52,21 +52,13 @@ export default {
             searchTodo: 'searchTodo',
         }),
         completeTodo(todo){
+            console.log("CurrentTodos-completeTodo Start");
             console.log(todo);
             this.inpTodo.todoName = todo.body;
             this.inpTodo.todoId = todo.todoId;
             this.inpTodo.userId = this.user._id;
             this.complete(this.inpTodo);
         }
-        // edit(todo){
-        //     this.$store.dispatch('editTodo', todo)
-        // },
-        // complete(todo){
-        //     this.$store.dispatch('completeTodo', todo)
-        // },
-        // remove(todo){
-        //     this.$store.dispatch('removeTodo', todo)
-        // }
     },
     computed: {
         ...mapState({
