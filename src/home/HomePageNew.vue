@@ -6,9 +6,8 @@
     <CurrentTodos></CurrentTodos>
     <br>
     <CompletedTodos></CompletedTodos>
-    <p>
-      <router-link to="/login">Logout</router-link>
-    </p>
+    <br>
+    <div><b-button to="/login">로그아웃</b-button></div>
     <!--<p>{{ user }}</p>-->
   </div>
 </template>

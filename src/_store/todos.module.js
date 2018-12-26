@@ -30,6 +30,7 @@ const mutations = {
             body: todo.body,
             completed: todo.completed,
             todoId: todo.todoId,
+            completedTodoId: todo.completedTodoId,
         })
     },
     // GetTodo.vue 에서 ADD 할 때
@@ -78,7 +79,8 @@ const actions = {
         let todoById = {
                 body: '',
                 completed: '',
-                todoId: ''
+                todoId: '',
+                completedId: '',
             }
             // 서버에서 할일을 가져옴
         todosService.getByUserId(id)
@@ -100,6 +102,7 @@ const actions = {
                             for (var j = 0; j < rs.length; j++) {
                                 if (rs[j].todoId === todoById.todoId) {
                                     todoById.completed = true;
+                                    todoById.completedTodoId = rs[j]._id;
                                 }
                             }
                             commit('LIST_TODO', todoById);
@@ -121,11 +124,17 @@ const actions = {
                 // 에러메세지 추가할 것
             });
     },
-    editTodo({ commit }, todo) {
-        commit('EDIT_TODO', todo)
-    },
-    removeTodo({ commit }, todo) {
+    // editTodo({ commit }, todo) {
+    //     commit('EDIT_TODO', todo)
+    // },
+    removeTodo({ dispatch, commit }, todo) {
         // commit('REMOVE_TODO', todo)
+        todosService.removeTodo(todo.todoId)
+            .then((res) => {
+                setTimeout(() => {
+                    dispatch('searchTodo', user._id);
+                })
+            })
     },
     completeTodo({ dispatch, commit }, todo) {
         // 오늘 날짜 추가
@@ -141,9 +150,22 @@ const actions = {
                 // 에러메세지 추가할 것
             });
     },
-    clearTodo({ commit }) {
-        commit('CLEAR_TODO')
+    rmCompletedTodo({ dispatch, commit }, todo) {
+        console.log(todo);
+        todosService.rmCompletedTodo(todo)
+            .then((response) => {
+                setTimeout(() => {
+                    // 투두를 등록하고 나서 재조회
+                    dispatch('searchTodo', user._id);
+                    // commit('ADD_TODO');
+                })
+            }, error => {
+
+            });
     },
+    // clearTodo({ commit }) {
+    //     commit('CLEAR_TODO')
+    // },
     setTodoDate({ commit }, dt) {
         console.log("dt : " + dt);
         commit('SET_DATE', dt);

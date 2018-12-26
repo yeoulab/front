@@ -13,6 +13,8 @@ export const todosService = {
     getByUserId,
     completeTodo,
     getCompleteByUserId,
+    removeTodo,
+    rmCompletedTodo,
 };
 
 let user = {};
@@ -26,6 +28,13 @@ function createTodo(todo) {
 
     return axios.post(`${config.apiUrl}/todos/create`, { todo })
         .then().catch();
+}
+
+function removeTodo(todoId) {
+    console.log("todoId : " + todoId);
+    token = getUserToken();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    return axios.post(`${config.apiUrl}/todos/remove`, { todoId: todoId }).then().catch();
 }
 
 function getUserToken() {
@@ -51,6 +60,14 @@ function completeTodo(todo) {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
     return axios.post(`${config.apiUrl}/complete`, { todo })
+        .then().catch();
+}
+
+function rmCompletedTodo(todo) {
+    console.log("remove completed Todo");
+    token = getUserToken();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    return axios.post(`${config.apiUrl}/complete/remove`, todo)
         .then().catch();
 }
 
