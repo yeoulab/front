@@ -5,10 +5,10 @@ import { axios } from 'axios';
 const user = JSON.parse(localStorage.getItem('user'));
 const state = user ? { status: { loggedIn: true }, user } : { status: {}, user: null }
 const actions = {
-    login({ dispatch, commit }, { username, password }) {
-        commit('loginRequest', { username });
+    login({ dispatch, commit }, { email, password }) {
+        commit('loginRequest', { email });
 
-        userService.login(username, password)
+        userService.login(email, password)
             .then(
                 user => {
                     commit('loginSuccess', user);

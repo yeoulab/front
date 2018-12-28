@@ -1,25 +1,30 @@
 <template>
     <div>
         <h4>회원가입</h4>
+        <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
         <!-- <form @submit.prevent="handleSubmit"> -->
             <!-- <div class="form-group"> -->
                 <!-- <label for="firstName">First Name</label> -->
-                <input type="text" v-model="user.firstName" v-validate="'required'" name="firstName" placeholder="First Name" class="form-control" :class="{ 'is-invalid': submitted && errors.has('firstName') }" />
+                <label for="inputFormatter">이메일</label>
+                <b-form-input type="email" v-model="user.email" v-validate="'required'" placeholder="Enter your e-mail"></b-form-input>
+                <!-- <input type="text" v-model="user.firstName" v-validate="'required'" name="firstName" placeholder="First Name" class="form-control" :class="{ 'is-invalid': submitted && errors.has('firstName') }" /> -->
                 <!-- <div v-if="submitted && errors.has('firstName')" class="invalid-feedback">{{ errors.first('firstName') }}</div> -->
             <!-- </div> -->
             <!-- <div class="form-group"> -->
                 <!-- <label for="lastName">Last Name</label> -->
-                <input type="text" v-model="user.lastName" v-validate="'required'" name="lastName" placeholder="Last Name" class="form-control" :class="{ 'is-invalid': submitted && errors.has('lastName') }" />
+                <!-- <input type="text" v-model="user.lastName" v-validate="'required'" name="lastName" placeholder="Last Name" class="form-control" :class="{ 'is-invalid': submitted && errors.has('lastName') }" /> -->
                 <!-- <div v-if="submitted && errors.has('lastName')" class="invalid-feedback">{{ errors.first('lastName') }}</div> -->
             <!-- </div> -->
             <!-- <div class="form-group"> -->
                 <!-- <label for="username">ID</label> -->
-                <input type="text" v-model="user.username" v-validate="'required'" name="username" placeholder="ID" class="form-control" :class="{ 'is-invalid': submitted && errors.has('username') }" />
+                <label for="inputFormatter">이름</label>
+                <input type="text" v-model="user.username" v-validate="'required'" name="username" placeholder="이름" class="form-control" :class="{ 'is-invalid': submitted && errors.has('username') }" />
                 <!-- <div v-if="submitted && errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</div> -->
             <!-- </div> -->
             <!-- <div class="form-group"> -->
                 <!-- <label htmlFor="password">Password</label> -->
-                <input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" placeholder="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
+                <label for="inputFormatter">비밀번호</label>
+                <b-form-input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" placeholder="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
                 <p></p>
                 <!-- <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div> -->
             <!-- </div> -->
@@ -45,8 +50,9 @@ export default {
     data () {
         return {
             user: {
-                firstName: '',
-                lastName: '',
+                // firstName: '',
+                // lastName: '',
+                email: '',
                 username: '',
                 password: ''
             },
@@ -54,23 +60,30 @@ export default {
         }
     },
     computed: {
-        ...mapState('account', ['status'])
+        ...mapState('account', ['status']),
+        ...mapState({
+            alert: state => state.alert
+        })
     },
     methods: {
         ...mapActions('account', ['register']),
         userRegist(e){
             console.log("userRegist start");
             console.log(this.user);
-            if( !this.user.firstName ){
-                alert("이름을 입력하세요");
-                return;
-            }
-            if( !this.user.lastName ){
-                alert("성을 입력하세요");
+            // if( !this.user.firstName ){
+            //     alert("이름을 입력하세요");
+            //     return;
+            // }
+            // if( !this.user.lastName ){
+            //     alert("성을 입력하세요");
+            //     return;
+            // }
+            if( !this.user.email ){
+                alert("이메일을 입력하세요");
                 return;
             }
             if( !this.user.username ){
-                alert("ID를 입력하세요");
+                alert("이름을 입력하세요");
                 return;
             }
             if( !this.user.password ){

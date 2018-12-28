@@ -1,9 +1,12 @@
 <template>
     <div>
         <h4 align="center">로그인</h4>
-        <label for="username" class="sr-only">아이디</label>
-        <input type="text" v-model="username" name="username" class="form-control" placeholder="id" required autofocus>
-        <label for="inputPassword" class="sr-only">패스워드</label>
+        <label for="inputFormatter">이메일</label>
+        <b-form-input type="email" v-model="email" v-validate="'required'" placeholder="Enter your e-mail"></b-form-input>
+        <!-- <label for="username" class="sr-only">아이디</label> -->
+        <!-- <input type="text" v-model="username" name="username" class="form-control" placeholder="id" required autofocus> -->
+        <!-- <label for="inputPassword" class="sr-only">패스워드</label> -->
+        <label for="inputFormatter">비밀번호</label>
         <input type="password" v-model="password" name="password" class="form-control" v-on:keyup.enter="user_login" placeholder="Password" required>
         <div class="checkbox mb-3">
             <label>
@@ -31,6 +34,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
     data () {
         return {
+            email: '',
             username: '',
             password: '',
             submitted: false
@@ -47,16 +51,16 @@ export default {
         ...mapActions('account', ['login', 'logout']),
         handleSubmit (e) {
             this.submitted = true;
-            const { username, password } = this;
+            const { email, password } = this;
 
-            if (username && password) {
-                this.login({ username, password })
+            if (email && password) {
+                this.login({ email, password })
             }
         },
         user_login( event ) {
             this.submitted = true;
-            const { username, password } = this;
-            if ( !username ){
+            const { email, password } = this;
+            if ( !email ){
                 alert("아이디를 입력하세요");
                 return;
             }
@@ -64,8 +68,8 @@ export default {
                 alert("패스워드를 입력하세요");
                 return;
             }
-            if (username && password) {
-                this.login({ username, password })
+            if (email && password) {
+                this.login({ email, password })
             }
         },
         handleSignInClick(event) {
