@@ -7,7 +7,7 @@
     <br>
     <CompletedTodos></CompletedTodos>
     <br>
-    <div><b-button to="/login">로그아웃</b-button></div>
+    <!-- <div><b-button to="/login">로그아웃</b-button></div> -->
     <!--<p>{{ user }}</p>-->
   </div>
 </template>
