@@ -1,0 +1,82 @@
+version: 2
+jobs: 
+  build: 
+    working_directory: /tmp/nginx
+    # branch 적용
+    #branches:
+    #  only:
+    #    - master
+    # docker 적용
+    docker:
+      - image: shinmaeng/docker:1.0
+    #machine: true
+    #   docker_layer_caching: true 
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      #- run:
+      #    name: Program Install
+      #    command: apk update && apk add curl
+      #- run: 
+      #    name: nginx Docker Build
+      #    command: docker build -t shinmaeng/nginx-front ./
+      #- run:
+      #    name: Dokcer nginx Run
+      #    command: docker run -d --name nginx-front -p 80:80 shinmaeng/nginx-front
+      #- run:
+      #    name: Confirm Docker container status
+      #    command: |
+      #      docker logs --follow nginx-front &
+      #      docker ps -a
+      #      docker inspect nginx-front
+      #- run:
+      #    name: nginx Run by Curl
+      #    command: curl localhost
+      - run:
+          name: Finding out environment
+          command: |
+            cat /etc/hosts
+            ls -l
+            npm install
+            npm run build
+            npm start &
+            docker ps -a
+  deploy: 
+    working_directory: /tmp/nginx
+    docker: 
+      - image: shinmaeng/docker:1.0
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true      
+      - run:
+          name: install awscli & Deploy to S3
+          command: |
+            apk add python
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python get-pip.py --user
+            export PATH=~/.local/bin:$PATH
+            pip install awscli --upgrade --user
+            npm install
+            npm run build
+            #aws --version
+            ls -lr
+            pwd
+            aws s3 sync /tmp/nginx/public s3://yeoul --delete
+      #- run:
+      #    name: Deploy to S3
+      #    command: |
+      #      aws --version
+      #      aws s3 sync ./public s3://yeoul --delete
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
