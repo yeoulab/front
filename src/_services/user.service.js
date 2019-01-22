@@ -16,8 +16,6 @@ function login(email, password) {
 
     // vue 의 fetch 를 이용하던지, axios 를 이용하던지
     // post 방식으로 login 처리를 한다.
-    console.log("email : " + email);
-    console.log("password : " + password);
     const requestOptions = {
         method: 'POST', // post 방식
         headers: { 'Content-Type': 'application/json' }, // json 형태
@@ -50,8 +48,6 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    console.log("register start");
-    console.log(`${config.apiUrl}/users/register`);
     return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 

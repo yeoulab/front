@@ -1,9 +1,9 @@
 <template>
     <div id="completed-todos" class="container">
-        <h6 v-if="completed.length > 0">한 일({{completed.length}})</h6>
+        <h6 v-if="completedTodos.length > 0">한 일({{completedTodos.length}})</h6>
         <ul class="list-group">
-            <li class="list-group-item" v-for="todo in completed" :key="todo.id">
-                {{todo.body}}
+            <li class="list-group-item" v-for="todo in completedTodos" :key="todo.id">
+                {{todo.todoName}}
                 <div class="btn-group">
                     <button type="button" @click="rmCompletedTodo(todo)" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-remove-circle"></span> Remove
@@ -25,6 +25,12 @@
             ...mapActions('todos',{
                 remove: 'rmCompletedTodo'
             }),
+            //body: todo.todoName,
+            //completed: true,
+            //todoId: todo.todoId,
+            //completedTodoId: todo.completedTodoId,
+            //addYn: true,
+            //delYn: false,
             rmCompletedTodo(todo){
                 console.log("rmCompletedTodo Start");
                 console.log(todo);
@@ -40,10 +46,12 @@
             // completed(){
             //     return this.$store.getters.completedTodos
             // },
+            // ...mapState({
+            //   completedTodos: state => state.todos.completedTodos,
+            // }), 
             ...mapGetters('todos',{
-                completed: 'completedTodo'
+                 completedTodos: 'completedTodo'
             })
         }
-
     }
 </script>

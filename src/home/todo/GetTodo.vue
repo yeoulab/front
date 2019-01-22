@@ -37,6 +37,7 @@
                 console.log("addTodo methods start");
                 console.log(this.todo);
                 this.createTodo(this.todo);
+                this.newTodo = "";
             },
 
         },

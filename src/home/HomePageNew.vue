@@ -7,6 +7,9 @@
     <br>
     <CompletedTodos></CompletedTodos>
     <br>
+    <Confirm></Confirm>
+    <br>
+
     <!-- <div><b-button to="/login">로그아웃</b-button></div> -->
     <!--<p>{{ user }}</p>-->
   </div>
@@ -16,6 +19,7 @@ import GetTodo from './todo/GetTodo.vue'
 import CurrentTodos from './todo/CurrentTodos.vue'
 import CompletedTodos from './todo/CompletedTodos.vue'
 import TodoDate from './todo/TodoDate.vue'
+import Confirm from './todo/Confirm.vue'
 import { mapState } from 'vuex';
 
 export default {  
@@ -24,6 +28,7 @@ export default {
     CurrentTodos,
     CompletedTodos,
     TodoDate,
+    Confirm,
   },
   computed: {
     ...mapState({

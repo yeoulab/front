@@ -15,10 +15,24 @@ export const todosService = {
     getCompleteByUserId,
     removeTodo,
     rmCompletedTodo,
+    confirmAllData,
 };
 
 let user = {};
 let token = '';
+
+function confirmAllData(param) {
+    token = getUserToken();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    console.log(param);
+    var todos = param.todos;
+    var completedTodos = param.completedTodos;
+    var payload = { todos, completedTodos };
+
+    return axios.post(`${config.apiUrl}/todos/confirm`, payload)
+        .then().catch();
+}
+
 // token 을 어떻게 전역으로 관리할 수 있을까..
 function createTodo(todo) {
     console.log("createTodo start");
@@ -76,7 +90,7 @@ function getCompleteByUserId(id, dt) {
     console.log("getCompleteByUserId");
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-    dt = dt.replace(/-/gi, "");
+    // dt = dt.replace(/-/gi, "");
 
     return axios.get(`${config.apiUrl}/complete/${id}/${dt}`)
         .then((response) => {

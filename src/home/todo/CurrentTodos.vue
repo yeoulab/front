@@ -3,7 +3,7 @@
         <h6 v-if="todos.length > 0">할 일({{todos.length}})</h6>
         <ul class="list-group">
             <li class="list-group-item" v-for="todo in todos" :key="todo.id">
-                {{todo.body}}
+                {{todo.todoName}}
             <div class="btn-group">
                 <!--
                 <button type="button" @click="edit(todo)" class="btn btn-default btn-sm">
@@ -22,7 +22,7 @@
     </div>
 </template>
 <script>
-import {mapState, mapActions} from 'vuex';
+import {mapState, mapActions, mapGetters} from 'vuex';
 //import axios from 'axios';
 import config from 'config';
 /*
@@ -38,6 +38,7 @@ export default {
                 todoName: '',
                 userId: '',
                 todoId: '',
+                guid: '',
             }
         }
     },
@@ -54,21 +55,22 @@ export default {
         completeTodo(todo){
             console.log("CurrentTodos-completeTodo Start");
             console.log(todo);
-            this.inpTodo.todoName = todo.body;
+            this.inpTodo.todoName = todo.todoName;
             this.inpTodo.todoId = todo.todoId;
             this.inpTodo.userId = this.user._id;
+            this.inpTodo.guid = todo.guid;
             this.complete(this.inpTodo);
         }
     },
     computed: {
         ...mapState({
-            todos: state => state.todos.todos,
+            //todos: state => state.todos.todos,
             user: state => state.account.user,
             todoDate: state => state.todos.todoDate,
+        }),
+         ...mapGetters('todos',{
+            todos: 'currentTodo'
         })
-        // todos(){
-        //     return this.$store.getters.todos
-        // }
     }
 }
 </script>
