@@ -4,19 +4,21 @@
         <ul class="list-group">
             <li class="list-group-item" v-for="todo in todos" :key="todo.id">
                 {{todo.todoName}}
-            <div class="btn-group">
-                <!--
-                <button type="button" @click="edit(todo)" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-edit"></span> Edit
-                </button>
-                -->
-                <button type="button" @click="completeTodo(todo)" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-ok-circle"></span> Complete
-                </button>
-                <button type="button" @click="remove(todo)" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-remove-circle"></span> Remove
-                </button>
-            </div>
+                <div class="btn-group">
+                    <!--
+                    <button type="button" @click="edit(todo)" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                    </button>
+                    -->
+                    <el-button v-on:click="completeTodo(todo)" type="success" icon="el-icon-check" circle></el-button>
+                    <!-- <button type="button" @click="completeTodo(todo)" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-ok-circle"></span> Complete
+                    </button> -->
+                    <el-button v-on:click="remove(todo)" type="danger" icon="el-icon-delete" circle></el-button>
+                    <!-- <button type="button" @click="remove(todo)" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle"></span> Remove
+                    </button> -->
+                </div>
             </li>
         </ul>
     </div>
@@ -75,7 +77,14 @@ export default {
 }
 </script>
 <style>
+    .list-group-item{
+        list-style: none;
+        /*margin: 5px;
+        padding: 5px; */
+        vertical-align: middle;
+    }
     .btn-group{
         float: right;
+        /* vertical-align: middle; */
     }
 </style>
