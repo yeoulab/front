@@ -2,10 +2,15 @@
     <div id="get-todo" class="container">
         <!-- :value 를 쓸 경우, computed 의 ...mapState 를 설정해주면 됨 
              v-model 은 get/set 이 있어야 함 -->
-        <b-input-group>
-            <b-form-input type="text" v-model="newTodo" placeholder="새로운 할 일"></b-form-input>
-            <b-button class="btn btn-default btn-sm" @click="addTodo">+</b-button>
-        </b-input-group>
+        <div>
+            <el-autocomplete v-model="newTodo">
+                
+            </el-autocomplete>
+            <el-button v-on:click="addTodo" type="primary" icon="el-icon-edit" circle></el-button>
+            <!-- <b-form-input type="text" v-model="newTodo" placeholder="새로운 할 일"></b-form-input> -->
+            <!-- <b-button class="btn btn-default btn-sm" @click="addTodo">+</b-button> -->
+        </div>
+        <!-- {{ this.user._id }} -->
     </div>
 </template>
 <script>
@@ -32,6 +37,8 @@
                 createTodo: 'addTodo',
             }),
             addTodo(){
+                console.log("Start addTodo");
+                console.log(this.user);
                 this.todo.todoName = this.newTodo;
                 this.todo.userId = this.user._id;
                 console.log("addTodo methods start");
