@@ -3,6 +3,8 @@ import { router } from '../_helpers';
 import { axios } from 'axios';
 
 const user = JSON.parse(localStorage.getItem('user'));
+console.log("account.module.js 에 있는 user");
+console.log(user);
 const state = user ? { status: { loggedIn: true }, user } : { status: {}, user: null }
 const actions = {
     login({ dispatch, commit }, { email, password }) {
@@ -12,7 +14,7 @@ const actions = {
             .then(
                 user => {
                     commit('loginSuccess', user);
-                    router.push('/');
+                    router.push('/home');
                     //axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
                 },
                 error => {
@@ -21,6 +23,8 @@ const actions = {
                     //axios.defaults.headers.common['Authorization'] = undefined;
                 }
             );
+        console.log(user);
+        console.log("userSErvice.long");
     },
     logout({ commit }) {
         userService.logout();
@@ -55,6 +59,7 @@ const mutations = {
     },
     loginSuccess(state, user) {
         state.status = { loggedIn: true };
+        console.log("user : " + user);
         state.user = user;
     },
     loginFailure(state) {
