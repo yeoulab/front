@@ -5,9 +5,10 @@
             <li class="list-group-item" v-for="todo in completedTodos" :key="todo.id">
                 {{todo.todoName}}
                 <div class="btn-group">
-                    <button type="button" @click="rmCompletedTodo(todo)" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-remove-circle"></span> Remove
-                    </button>
+                    <el-button v-on:click="rmCompletedTodo(todo)" type="danger" icon="el-icon-delete" circle></el-button>
+                    <!-- <button type="button" @click="rmCompletedTodo(todo)" class="btn btn-default btn-sm"> -->
+                    <!-- <span class="glyphicon glyphicon-remove-circle"></span> Remove -->
+                    <!-- </button> -->
                 </div>
             </li>
         </ul>
@@ -55,3 +56,14 @@
         }
     }
 </script>
+<style>
+    /* .list-group-item{
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+    }
+    .btn-group{
+        float: right;
+        vertical-align: middle;
+    } */
+</style>
