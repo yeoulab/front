@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VeeValidate from 'vee-validate';
+import ElementUI from 'element-ui';
+// import './element-variables.scss'
 
 import { store } from './_store';
 import { router } from './_helpers';
@@ -8,6 +10,7 @@ import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(VeeValidate);
 Vue.use(BootstrapVue);
+Vue.use(ElementUI);
 
 // setup fake backend
 // import { configureFakeBackend } from './_helpers';
