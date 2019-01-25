@@ -1,6 +1,7 @@
 <template>
     <div id="confirm" class="container">
-        <b-button @click="confirm">반영 ^_^</b-button>
+        <!-- <b-button @click="confirm">반영 ^_^</b-button> -->
+        <el-button v-on:click="confirm">반영</el-button>
     </div>
 </template>
 <script>
