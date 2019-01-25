@@ -139,6 +139,7 @@ const actions = {
     },
     // 조회하기
     searchTodo({ commit }, id) {
+        console.log("##### searchTodo ####### : " + id);
         let todoById = {
                 todoName: '',
                 todoId: '',
@@ -160,12 +161,10 @@ const actions = {
                     .then(rs => {
                         console.log("완료된 투두 조회");
                         console.log("오늘 : " + state.todoDate);
-                        console.log(rs[0].todos.length);
-                        console.log(rs);
                         for (var i = 0; i < response.length; i++) {
                             todoById.todoName = response[i].todoName;
                             todoById.todoId = response[i]._id;
-                            // complete 된 건은 true 로 바꿔준다.
+                            // complete 된 건은 true 로 바꿔준다
                             for (var j = 0; j < rs[0].todos.length; j++) {
                                 if (rs[0].todos[j].todoId === todoById.todoId) {
                                     todoById.completed = true;
@@ -327,6 +326,12 @@ const getters = {
     },
     currentTodo: state => {
         return state.todos.filter(todos => !todos.delYn);
+    },
+    todoRates: () => {
+        var completedTodos = state.completedTodos.filter(completedTodos => !completedTodos.delYn)
+        var currentTodos = state.todos.filter(todos => !todos.delYn);
+
+        return completedTodos.length / currentTodos.length * 100;
     }
 };
 // const setters = {};
