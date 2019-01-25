@@ -1,21 +1,29 @@
 <template>
-    <div>
+    <div class="login">
         <h4 align="center">로그인</h4>
         <label for="inputFormatter">이메일</label>
-        <b-form-input type="email" v-model="email" v-validate="'required'" placeholder="Enter your e-mail"></b-form-input>
-        <!-- <label for="username" class="sr-only">아이디</label> -->
-        <!-- <input type="text" v-model="username" name="username" class="form-control" placeholder="id" required autofocus> -->
-        <!-- <label for="inputPassword" class="sr-only">패스워드</label> -->
+        <el-input type="email" v-model="email" v-validate="'required'" placeholder="Enter your e-mail"></el-input>
         <label for="inputFormatter">비밀번호</label>
-        <input type="password" v-model="password" name="password" class="form-control" v-on:keyup.enter="user_login" placeholder="Password" required>
+        <!-- <input type="password" v-model="password" name="password" class="form-control" v-on:keyup.enter="user_login" placeholder="Password" required> -->
+        <el-input type="password" v-model="password" v-on:keyup.enter="user_login" placeholder="Password" required></el-input>
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="user_login">Sign in</button>
+        <el-button v-on:click="user_login">Sign in</el-button>
         <p></p>
-        <div class="body" align="center">
+        <el-button v-on:click="onRegister">회원가입</el-button>
+        <el-button>이메일/비밀번호 찾기</el-button>
+        <!-- <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="user_login">Sign in</button> -->
+        <p></p>
+        <div class="google-btn" v-on:click="handleSignInClick()" >
+            <div  class="google-icon-wrapper" >
+                <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" >
+            </div>
+            <p class="btn-text" >Sign up with google</p>
+        </div>
+        <!-- <div class="body" align="center">
             <a @click="handleSignInClick()">
                 <img src="https://s3.ap-northeast-2.amazonaws.com/diary-image/btn_google_signin_light_normal_web.png">
             </a>
@@ -24,7 +32,7 @@
         <div class="footer" align="center">
             <router-link to="/register" class="btn btn-link">회원가입</router-link>
             <router-link to="/register" class="btn btn-link">아이디찾기</router-link>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -49,6 +57,9 @@ export default {
     },
     methods: {
         ...mapActions('account', ['login', 'logout']),
+        onRegister(){
+            this.$router.push({path:'register'})
+        },
         handleSubmit (e) {
             this.submitted = true;
             const { email, password } = this;
@@ -123,7 +134,21 @@ export default {
         // </div>
 };
 </script>
-<style>
+<style lang="scss">
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+h4{
+   font-family: 'Malgun Gothic', sans-serif;
+   text-align: center;
+   font-weight: bold;
+}
+
+.login{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%)
+}
+
 .button {
   background-color: #4CAF50; /* Green */
   border: none;
@@ -141,5 +166,51 @@ export default {
   color: black; 
   border: 2px solid #4CAF50;
 }
+
+
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669F2;
+
+.google-btn {
+  width: 184px;
+  height: 42px;
+  background-color: $google-blue;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  cursor: pointer;
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: $white;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: $white;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+  }
+  &:hover {
+    box-shadow: 0 0 6px $google-blue;
+  }
+  &:active {
+    background: $button-active-blue;
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
 </style>
