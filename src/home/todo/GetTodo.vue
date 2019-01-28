@@ -10,7 +10,6 @@
             <!-- <b-form-input type="text" v-model="newTodo" placeholder="새로운 할 일"></b-form-input> -->
             <!-- <b-button class="btn btn-default btn-sm" @click="addTodo">+</b-button> -->
         </div>
-        <!-- {{ this.user._id }} -->
     </div>
 </template>
 <script>
@@ -37,12 +36,8 @@
                 createTodo: 'addTodo',
             }),
             addTodo(){
-                console.log("Start addTodo");
-                console.log(this.user);
                 this.todo.todoName = this.newTodo;
                 this.todo.userId = this.user._id;
-                console.log("addTodo methods start");
-                console.log(this.todo);
                 this.createTodo(this.todo);
                 this.newTodo = "";
             },
