@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <el-progress type="circle" :percentage=todoRates></el-progress>
-    <!-- <label>오늘의 진도</label> -->
+  <div class="chart">
+    <el-progress type="circle" color="#8e71c7" :percentage="todoRates"></el-progress>
   </div>
 </template>
 <script>
@@ -22,4 +21,9 @@ export default{
 }
 </script>
 <style>
+.chart{
+  /* position:absolute;
+  top: 200px;
+  left: 20px; */
+}
 </style>
