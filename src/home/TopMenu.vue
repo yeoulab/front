@@ -4,8 +4,8 @@
         <el-menu-item index="0"><i class="el-icon-menu" v-on:click="check()"></i></el-menu-item>
         <el-menu-item index="1">Todo 관리</el-menu-item>
         <el-menu-item index="2" disabled>山愛커플</el-menu-item>
-        <el-menu-item index="3" disabled>피카소 Shin</el-menu-item>
-        <el-menu-item index="4" disabled>늠름이의 일상</el-menu-item>
+        <!-- <el-menu-item index="3" disabled>피카소 Shin</el-menu-item>
+        <el-menu-item index="4" disabled></el-menu-item> -->
         <el-submenu index="5" align="right">
           <template slot=title>요! {{ this.user.username }} 님</template>
           <el-menu-item index="5-1">회원정보</el-menu-item>
@@ -57,4 +57,5 @@ export default{
 }
 </script>
 <style>
+
 </style>
