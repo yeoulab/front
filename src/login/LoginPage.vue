@@ -11,17 +11,21 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <el-button v-on:click="user_login">Sign in</el-button>
+        <div>
+            <el-button v-on:click="user_login">Sign in</el-button>
+            <el-button v-on:click="onRegister">회원가입</el-button>
+        </div>
         <p></p>
-        <el-button v-on:click="onRegister">회원가입</el-button>
-        <el-button>이메일/비밀번호 찾기</el-button>
+        <div>
+            <el-button>비밀번호 찾기</el-button>
+        </div>
         <!-- <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="user_login">Sign in</button> -->
         <p></p>
         <div class="google-btn" v-on:click="handleSignInClick()" >
             <div  class="google-icon-wrapper" >
                 <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" >
             </div>
-            <p class="btn-text" >Sign up with google</p>
+            <p class="btn-text" >Sign in with google</p>
         </div>
         <!-- <div class="body" align="center">
             <a @click="handleSignInClick()">
