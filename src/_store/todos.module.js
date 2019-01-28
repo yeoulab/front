@@ -7,9 +7,7 @@ import { todosService } from '../_services';
 import { commonFunc } from '../_helpers';
 
 var todoToday = new Date().toISOString().slice(0, 10);
-console.log("todos.module.js - todoDay : " + todoToday);
-const user = JSON.parse(localStorage.getItem('user'));
-// document.getElementById("todoDate").value = res;
+// const user = JSON.parse(localStorage.getItem('user'));
 
 const state = {
         todos: [], // 할일
@@ -44,7 +42,7 @@ const mutations = {
             todoId: todo.todoId,
             completedTodoId: todo.completedTodoId,
             guid: todo.guid,
-            userId: user._id,
+            userId: state.userId,
             addYn: false,
             delYn: false,
         })
@@ -52,15 +50,15 @@ const mutations = {
     // GetTodo.vue 에서 ADD 할 때
     ADD_TODO(state) {
         let guid = commonFunc.guid();
-        console.log("guid : " + guid);
-        console.log(user);
+        console.log("ADD_TODO");
+        console.log(state);
 
         state.todos.push({
             todoName: state.newTodo,
             //completed: false,
             todoId: '',
             //completedTodoId: '',
-            userId: user._id,
+            userId: state.userId,
             guid: guid, // 내부적으로 관리하는 guid
             addYn: true, // DB 에 저장할 대상
             delYn: false, // DB 에 삭제할 대상
@@ -139,7 +137,9 @@ const actions = {
     },
     // 조회하기
     searchTodo({ commit }, id) {
-        console.log("##### searchTodo ####### : " + id);
+
+        commit('SET_USER', id);
+
         let todoById = {
                 todoName: '',
                 todoId: '',
@@ -154,32 +154,34 @@ const actions = {
 
         // 서버에서 할일을 가져옴
         todosService.getByUserId(id)
-            .then(response => {
+            .then((response) => {
                 // 기존 todo all clear
                 commit('REMOVE_TODO_LIST');
                 todosService.getCompleteByUserId(id, state.todoDate)
-                    .then(rs => {
-                        console.log("완료된 투두 조회");
-                        console.log("오늘 : " + state.todoDate);
+                    .then((rs) => {
                         for (var i = 0; i < response.length; i++) {
                             todoById.todoName = response[i].todoName;
                             todoById.todoId = response[i]._id;
                             // complete 된 건은 true 로 바꿔준다
-                            for (var j = 0; j < rs[0].todos.length; j++) {
-                                if (rs[0].todos[j].todoId === todoById.todoId) {
-                                    todoById.completed = true;
-                                    todoById.completedTodoId = rs[0].todos[j]._id;
+                            if (rs.length > 0) {
+                                for (var j = 0; j < rs[0].todos.length; j++) {
+                                    if (rs[0].todos[j].todoId === todoById.todoId) {
+                                        todoById.completed = true;
+                                        todoById.completedTodoId = rs[0].todos[j]._id;
+                                    }
                                 }
                             }
                             commit('LIST_TODO', todoById);
                         }
-                        for (var j = 0; j < rs[0].todos.length; j++) {
-                            completedTodoById.completedDate = rs[0].completedDate;
-                            completedTodoById.todoName = rs[0].todos[j].todoName;
-                            completedTodoById.todoId = rs[0].todos[j].todoId;
-                            completedTodoById.completedId = rs[0].todos[j]._id;
-                            completedTodoById.guid = rs[0].todos[j].guid;
-                            commit('LIST_COMPLETED_TODO', completedTodoById);
+                        if (rs.length > 0) {
+                            for (var j = 0; j < rs[0].todos.length; j++) {
+                                completedTodoById.completedDate = rs[0].completedDate;
+                                completedTodoById.todoName = rs[0].todos[j].todoName;
+                                completedTodoById.todoId = rs[0].todos[j].todoId;
+                                completedTodoById.completedId = rs[0].todos[j]._id;
+                                completedTodoById.guid = rs[0].todos[j].guid;
+                                commit('LIST_COMPLETED_TODO', completedTodoById);
+                            }
                         }
                     })
             });
@@ -210,10 +212,11 @@ const actions = {
             });
     },
     // GetTodo.vue 에서 호출
-    addTodo({ dispatch, commit }, todo) {
+    addTodo({ dispatch, commit, rootState }, todo) {
 
         // vuex 에 ADD
-        commit('ADD_TODO')
+        console.log(rootState);
+        commit('ADD_TODO', todo);
 
         // todosService.createTodo(todo)
         //     .then(response => {
@@ -315,7 +318,7 @@ const actions = {
             .then(rs => {
                 // 투두를 등록하고 나서 재조회
                 console.log("재조회 가능?");
-                dispatch('searchTodo', user._id);
+                dispatch('searchTodo', state.userId);
             });
     }
 }
@@ -331,7 +334,12 @@ const getters = {
         var completedTodos = state.completedTodos.filter(completedTodos => !completedTodos.delYn)
         var currentTodos = state.todos.filter(todos => !todos.delYn);
 
-        return completedTodos.length / currentTodos.length * 100;
+        var a = 1;
+        a = completedTodos.length;
+        var b = 1;
+        b = currentTodos.length;
+
+        return parseInt(a / b * 100);
     }
 };
 // const setters = {};
