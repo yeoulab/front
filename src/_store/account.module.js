@@ -3,8 +3,6 @@ import { router } from '../_helpers';
 import { axios } from 'axios';
 
 const user = JSON.parse(localStorage.getItem('user'));
-console.log("account.module.js 에 있는 user");
-console.log(user);
 const state = user ? { status: { loggedIn: true }, user } : { status: {}, user: null }
 const actions = {
     login({ dispatch, commit }, { email, password }) {
@@ -23,8 +21,6 @@ const actions = {
                     //axios.defaults.headers.common['Authorization'] = undefined;
                 }
             );
-        console.log(user);
-        console.log("userSErvice.long");
     },
     logout({ commit }) {
         userService.logout();
