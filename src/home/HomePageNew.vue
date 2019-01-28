@@ -1,10 +1,7 @@
 <template>
   <div class="todoList">
-    <!-- <div class="menu">
-      <Navigation></Navigation>
-    </div> -->
-    <div class="todoChart">
-      <TodoStatistic></TodoStatistic>
+    <div class="topMenu">
+      <TopMenu></TopMenu>
     </div>
     <div class="todo">
       <TodoDate></TodoDate>
@@ -16,9 +13,6 @@
       <br>
       <Confirm></Confirm>
       <br>
-    </div>
-    <div class="topMenu">
-      <TopMenu></TopMenu>
     </div>
   </div>
 </template>
@@ -53,24 +47,19 @@ export default {
 }
 </script>
 <style>
-  body {
+ body {
     font-family: Helvetica, sans-serif;
   }
-
 .topMenu{
   position: absolute;
   width: 100%;
   left: 0;
   top: 0%;
 }
-
 .todo{
   position:absolute;
-  width: 300px;
-  top: 70px;
-  left: 220px;
-  /* top:50%; */
-  /* left:50%; */
+  top: 100px;
+  left: 50px;
   /* transform:translate(-50%, 0%) */
 }
 .todoChart{
@@ -79,12 +68,4 @@ export default {
   top: 70px;
   left: 50px;
 }
-
-.menu{
-  position:absolute;
-  width: 200px;
-  top: 70px;
-  left: 0%;
-}
-
 </style>
