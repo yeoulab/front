@@ -27,12 +27,10 @@ gapi.load('client:auth2', () => {
         apiKey: 'AIzaSyAwgiVKcVyhuDkNb6UVCv5UM296fH73vu8',
         discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
         clientId: '266701870310-nt5rnr20s11ssvur86t4imndpk0un94j.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/contacts.readonly' // https://www.googleapis.com/auth/contacts.readonly' // https://www.googleapis.com/auth/contacts.readonly
+        scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/user.emails.read' // https://www.googleapis.com/auth/contacts.readonly' // https://www.googleapis.com/auth/contacts.readonly
     }).then(() => {
         // Listen for sign-in state changes.
-        console.log("@@@");
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-        console.log("###");
         console.log(gapi.auth2.getAuthInstance().isSignedIn.get());
         // Handle the initial sign-in state.
         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());

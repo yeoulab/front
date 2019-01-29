@@ -1,5 +1,6 @@
 <template>
     <div class="login">
+        <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
         <h4 align="center">로그인</h4>
         <label for="inputFormatter">이메일</label>
         <el-input type="email" v-model="email" v-validate="'required'" placeholder="Enter your e-mail"></el-input>
@@ -47,13 +48,16 @@ export default {
     data () {
         return {
             email: '',
-            username: '',
+            //username: '',
             password: '',
             submitted: false
         }
     },
     computed: {
-        ...mapState('account', ['status'])
+        ...mapState('account', ['status']),
+        ...mapState({
+            alert: state => state.alert
+        })
     },
     created () {
         // reset login status
@@ -97,20 +101,18 @@ export default {
             // Make an API call to the People API, and print the user's given name.
             gapi.client.people.people.get({
                 'resourceName': 'people/me',
-                'requestMask.includeField': 'person.names'
+                'requestMask.includeField': 'person.names,person.emailAddresses'
             }).then(function(response) {
-                console.log('Login 에서 호출');
-                console.log('Hello, ' + response.result.names[0].givenName);
                 //this.user.username  = response.result.metadata.source.id;
                 that.submitted      = true;
                 // that.username = response.result.names[0].metadata.source.id;
                 // that.password = response.result.names[0].metadata.source.id;
 
-                var username = response.result.names[0].metadata.source.id;
+                var email = response.result.emailAddresses[0].value;
                 var password = response.result.names[0].metadata.source.id;
-                if (username && password) {
+                if (email && password) {
                     console.log("##### google 로그인 처리 #####");
-                    that.login({ username, password })
+                    that.login({ email, password })
                 }
             }, function(reason) {
                 console.log('Error: ' + reason.result.error.message);

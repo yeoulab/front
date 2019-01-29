@@ -2,21 +2,21 @@
     <div class="register">
         <h4>가입해보세요!</h4>
         <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
-                <label for="inputFormatter">이메일</label>
-                <el-input type="email" v-model="user.email" v-validate="'required'" placeholder="이메일"></el-input>
-                <label for="inputFormatter">이름</label>
-                <!-- <input type="text" v-model="user.username" v-validate="'required'" name="username" placeholder="이름" class="form-control" :class="{ 'is-invalid': submitted && errors.has('username') }" /> -->
-                <el-input type="text" v-model="user.username" v-validate="'required'" name="username" placeholder="이름"></el-input>
-                <label for="inputFormatter">비밀번호</label>
-                <!-- <b-form-input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" placeholder="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" /> -->
-                <el-input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" placeholder="password"></el-input>
-                <p></p>
-                <el-button  v-on:click="userRegist">가입</el-button>
-                <!-- <img v-show="status.registering" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> -->
-                <el-button  v-on:click="onLogin">로그인</el-button>
-                <!-- <router-link to="/login" class="btn btn-link">뒤로가기</router-link> -->
-                <p></p>
-            <!-- </div> -->
+        <label for="inputFormatter">이메일</label>
+        <el-input type="email" v-model="user.email" v-validate="'required'" placeholder="이메일"></el-input>
+        <label for="inputFormatter">이름</label>
+        <!-- <input type="text" v-model="user.username" v-validate="'required'" name="username" placeholder="이름" class="form-control" :class="{ 'is-invalid': submitted && errors.has('username') }" /> -->
+        <el-input type="text" v-model="user.username" v-validate="'required'" name="username" placeholder="이름"></el-input>
+        <label for="inputFormatter">비밀번호</label>
+        <!-- <b-form-input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" placeholder="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" /> -->
+        <el-input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" placeholder="password"></el-input>
+        <p></p>
+        <el-button  v-on:click="userRegist">가입</el-button>
+        <!-- <img v-show="status.registering" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> -->
+        <el-button  v-on:click="onLogin">로그인</el-button>
+        <!-- <router-link to="/login" class="btn btn-link">뒤로가기</router-link> -->
+        <p></p>
+        <!-- </div> -->
         <!-- </form> -->
         <!-- <button id="signin-button" @click="handleSignInClick()">구글로 회원가입</button> -->
         <!-- <a @click="handleSignInClick()">
@@ -105,17 +105,13 @@ export default {
                     // Make an API call to the People API, and print the user's given name.
                     gapi.client.people.people.get({
                         'resourceName': 'people/me',
-                        'requestMask.includeField': 'person.names'
+                        'requestMask.includeField': 'person.names,person.emailAddresses'
                     }).then(function(response) {
-                        console.log('Register 에서 호출');
-                        console.log('Hello, ' + response.result.names[0].givenName);
 
                         window.setTimeout( () => {
-                            console.log("that.firstName", that.firstName);
                             that.submitted      = true;
-                            that.user.firstName = response.result.names[0].familyName;
-                            that.user.lastName  = response.result.names[0].givenName;
-                            that.user.username  = response.result.names[0].metadata.source.id;
+                            that.user.email     = response.result.emailAddresses[0].value;
+                            that.user.username  = response.result.names[0].displayName;
                             that.user.password  = response.result.names[0].metadata.source.id;
 
                             that.register(that.user);
