@@ -22,17 +22,27 @@
         <!-- <a @click="handleSignInClick()">
             <img src="https://s3.ap-northeast-2.amazonaws.com/diary-image/btn_google_signin_light_normal_web.png">
         </a> -->
-        <div class="google-btn" v-on:click="handleSignInClick()" >
-            <div  class="google-icon-wrapper" >
-                <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" >
-            </div>
-            <p class="btn-text" >Sign up with google</p>
-        </div>
+        <el-row>
+            <el-col :span="60">
+                    <div class="naver-btn">
+                        <a href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://localhost:8080/register&state=yeoulab'><img height='44' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>
+                    </div>
+            </el-col>
+            <el-col :span="60">
+                <div class="google-btn" v-on:click="handleSignInClick()" >
+                    <div  class="google-icon-wrapper" >
+                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" >
+                    </div>
+                    <p class="btn-text" >Sign up with google</p>
+                </div>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { socialService } from '../_services';
 
 export default {
     data () {
@@ -52,6 +62,39 @@ export default {
         ...mapState({
             alert: state => state.alert
         })
+    },
+    created (){
+        var urlParams = new URLSearchParams(window.location.search);
+        var code = urlParams.get('code');
+        var state = urlParams.get('state');
+        var param = {code, state};
+        console.log(param);
+        if( code && state ){
+            socialService.getNaverToken(param).then((res) => {
+                console.log("getNaverToken Start");
+                var token = res.access_token;
+                var value = { token };
+                socialService.getNaverInfo(value).then((res) =>{
+                    console.log("getNaverInfo Start");
+                    if( res.data.response.email ){
+                        var that = this;
+                        var email = res.data.response.email;
+                        var name  = res.data.response.name;
+                        var password = res.data.response.id;
+                        if (email && password && name) {
+                            console.log("##### naver sign up 처리 #####");
+                            
+                            that.submitted      = true;
+                            that.user.email     = email;
+                            that.user.username  = name;
+                            that.user.password  = password;
+
+                            that.register(that.user);
+                        }
+                    }
+                });
+            });
+        }
     },
     methods: {
         ...mapActions('account', ['register']),
@@ -146,6 +189,17 @@ h4{
   top:50%;
   left:50%;
   transform:translate(-50%, -50%)
+}
+
+.el-row {
+    margin-bottom: 50px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.naver-btn{
+    width: 130px;
 }
 
 $white: #fff;

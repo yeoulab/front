@@ -29,16 +29,21 @@ const actions = {
     },
     register({ dispatch, commit }, user) {
         commit('registerRequest', user);
-
+        console.log("register - start");
         userService.register(user)
             .then(
                 user => {
                     commit('registerSuccess', user);
-                    router.push('/login');
-                    setTimeout(() => {
-                        // display success message after route change completes
-                        dispatch('alert/success', 'Registration successful', { root: true });
+                    setTimeout( (user) => {
+                        console.log(state.user);
+                        dispatch('login', { email: state.user.email, password: state.user.password } )
                     })
+
+                    // router.push('/login');
+                    // setTimeout(() => {
+                    //     // display success message after route change completes
+                    //     dispatch('alert/success', 'Registration successful', { root: true });
+                    // })
                 },
                 error => {
                     commit('registerFailure', error);
@@ -68,12 +73,14 @@ const mutations = {
     },
     registerRequest(state, user) {
         state.status = { registering: true };
+        state.user = user;
     },
     registerSuccess(state, user) {
         state.status = {};
     },
     registerFailure(state, error) {
         state.status = {};
+        stae.user = null;
     }
 };
 

@@ -11,7 +11,8 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(VeeValidate);
 Vue.use(BootstrapVue);
 Vue.use(ElementUI);
-
+var VueCookie = require('vue-cookie');
+Vue.use(VueCookie);
 // setup fake backend
 // import { configureFakeBackend } from './_helpers';
 // configureFakeBackend();
