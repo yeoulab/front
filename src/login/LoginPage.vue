@@ -37,7 +37,7 @@
         <el-row>
             <el-col :span="60">
                 <div class="naver-btn">
-                    <a href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://localhost:8080/login&state=yeoulab'><img height='44' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>
+                    <a v-bind:href="getNaverBtn"><img height='44' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>
                 </div>
             </el-col>
             <el-col :span="60">
@@ -91,7 +91,16 @@ export default {
         ...mapState('account', ['status']),
         ...mapState({
             alert: state => state.alert
-        })
+        }),
+        getNaverBtn(){
+            var host = window.location.host;
+            console.log("host :"+host);
+
+            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://'
+                    + host
+                    + '/register&state=yeoulab';
+            return naverBtn;
+        }
     },
     created () {
         // reset login status

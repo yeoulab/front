@@ -14,7 +14,7 @@ import FirstPage from '../home/FirstPage'
 Vue.use(Router);
 
 export const router = new Router({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         { path: '/home', component: HomePageNew }, // home 인 경우 Homepage vue 로 렌더링
         { path: '/login', component: LoginPage }, // login 인 경우 LoginPage Vue 로 렌더링

@@ -25,7 +25,7 @@
         <el-row>
             <el-col :span="60">
                     <div class="naver-btn">
-                        <a href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://localhost:8080/register&state=yeoulab'><img height='44' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>
+                        <a v-bind:href="getNaverBtn" ><img height='44' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>
                     </div>
             </el-col>
             <el-col :span="60">
@@ -55,19 +55,36 @@ export default {
                 password: ''
             },
             submitted: false
+            ,
         }
     },
     computed: {
         ...mapState('account', ['status']),
         ...mapState({
             alert: state => state.alert
-        })
+        }),
+        getNaverBtn(){
+            var host = window.location.host;
+            console.log("host :"+host);
+
+            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://'
+                    + host
+                    + '/register&state=yeoulab';
+            return naverBtn;
+        }
     },
     created (){
         var urlParams = new URLSearchParams(window.location.search);
+
+        var url = window.location.host;
+        console.log("host :"+url);
+        
+
         var code = urlParams.get('code');
         var state = urlParams.get('state');
         var param = {code, state};
+
+
         console.log(param);
         if( code && state ){
             socialService.getNaverToken(param).then((res) => {
