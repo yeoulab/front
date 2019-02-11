@@ -98,6 +98,7 @@ export default {
 
             var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://'
                     + host
+                    + '/#'
                     + '/register&state=yeoulab';
             return naverBtn;
         }
@@ -112,6 +113,7 @@ export default {
         this.password = this.$cookie.get("password");
 
         var urlParams = new URLSearchParams(window.location.search);
+        console.log(urlParams);
         var code = urlParams.get('code');
         var state = urlParams.get('state');
         var param = {code, state};

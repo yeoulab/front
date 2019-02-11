@@ -3,9 +3,12 @@
         <!-- :value 를 쓸 경우, computed 의 ...mapState 를 설정해주면 됨 
              v-model 은 get/set 이 있어야 함 -->
         <div>
-            <el-autocomplete v-model="newTodo">
+            <!-- <el-autocomplete v-model="newTodo">
                 
-            </el-autocomplete>
+            </el-autocomplete> -->
+            <el-input v-model="newTodo">
+                
+            </el-input>
             <el-button v-on:click="addTodo" type="primary" icon="el-icon-edit" circle></el-button>
             <!-- <b-form-input type="text" v-model="newTodo" placeholder="새로운 할 일"></b-form-input> -->
             <!-- <b-button class="btn btn-default btn-sm" @click="addTodo">+</b-button> -->

@@ -4,7 +4,7 @@
         <br>
         <h3>하루를 즐겁게!</h3>
         <br>
-        <el-date-picker v-model="stdDate" type="date"></el-date-picker>
+        <el-date-picker v-model="stdDate" v-on:change="refreshTodo" type="date" ></el-date-picker>
     </div>
 </template>
 <script>
