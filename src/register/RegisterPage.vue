@@ -67,9 +67,7 @@ export default {
             var host = window.location.host;
             console.log("host :"+host);
 
-            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://'
-                    + host
-                    + '/register&state=yeoulab';
+            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://server.yeoulab.ml:4000/social/naverGetCode&state=yeoulab';
             return naverBtn;
         }
     },

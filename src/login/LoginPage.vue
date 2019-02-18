@@ -96,15 +96,18 @@ export default {
             var host = window.location.host;
             console.log("host :"+host);
 
-            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://'
-                    + host
-                    + '/#'
-                    + '/register&state=yeoulab';
+            // var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://'
+            //         + host
+            //         + '/#/login&state=yeoulab';
+
+            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://server.yeoulab.ml:4000/social/naverGetCode&state=yeoulab';
+                    
             return naverBtn;
         }
     },
     created () {
         // reset login status
+        console.log("LoginPage Vue Created");
         this.logout();
 
         // coockie setting
@@ -112,10 +115,16 @@ export default {
         this.email    = this.$cookie.get("email");
         this.password = this.$cookie.get("password");
 
-        var urlParams = new URLSearchParams(window.location.search);
-        console.log(urlParams);
-        var code = urlParams.get('code');
-        var state = urlParams.get('state');
+        // console.log("#####");
+        // console.log(window.location.hash);
+        // console.log("#####222222");
+        // console.log(this.$route.params);
+        // console.log(this.$route.hash);
+        // console.log(this.$route.query.code);
+        // var urlParams = new URLSearchParams(window.location.hash.replace("#","?"));
+        // console.log(urlParams);
+        var code = this.$route.query.code;
+        var state = this.$route.query.state;
         var param = {code, state};
         console.log(param);
         if( code && state ){
