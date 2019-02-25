@@ -25,7 +25,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                query: { compact : false },
+                query: { compact: false },
                 exclude: /node_modules/
             },
             {
@@ -53,7 +53,8 @@ module.exports = {
         config: JSON.stringify({
             //apiUrl: 'http://localhost:4000'
             //apiUrl: 'http://34.85.37.150:4000'
-            apiUrl: 'http://54.180.100.1:4000'
+            //apiUrl: 'http://54.180.100.1:4000'
+            apiUrl: 'http://server.yeoulab.ml:4000'
         })
     }
 }

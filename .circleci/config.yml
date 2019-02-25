@@ -63,7 +63,8 @@ jobs:
             #aws --version
             ls -lr
             pwd
-            aws s3 sync /tmp/nginx/public s3://yeoul --delete
+            #aws s3 sync /tmp/nginx/public s3://yeoul --delete
+            aws s3 sync /tmp/nginx/public s3://yeoulab.ml --delete
       #- run:
       #    name: Deploy to S3
       #    command: |
