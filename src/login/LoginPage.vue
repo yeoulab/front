@@ -28,6 +28,7 @@
             <el-button v-on:click="user_login">Sign in</el-button>
             <el-button v-on:click="onRegister">회원가입</el-button>
             <el-button>비밀번호 찾기</el-button>
+            <el-button>build success?</el-button>
         </div>
         <p></p>
         <div>
