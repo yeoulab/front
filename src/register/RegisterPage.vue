@@ -72,16 +72,9 @@ export default {
         }
     },
     created (){
-        var urlParams = new URLSearchParams(window.location.search);
-
-        var url = window.location.host;
-        console.log("host :"+url);
-        
-
-        var code = urlParams.get('code');
-        var state = urlParams.get('state');
+        var code = this.$route.query.code;
+        var state = this.$route.query.state;
         var param = {code, state};
-
 
         console.log(param);
         if( code && state ){
