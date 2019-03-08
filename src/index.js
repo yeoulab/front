@@ -7,12 +7,15 @@ import { store } from './_store';
 import { router } from './_helpers';
 import App from './app/App';
 import BootstrapVue from 'bootstrap-vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(VeeValidate);
 Vue.use(BootstrapVue);
 Vue.use(ElementUI);
 var VueCookie = require('vue-cookie');
 Vue.use(VueCookie);
+Vue.use(Vuetify);
 // setup fake backend
 // import { configureFakeBackend } from './_helpers';
 // configureFakeBackend();

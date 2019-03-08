@@ -44,6 +44,8 @@ export default {
             }
         }
     },
+    components: {
+    },
     created() {
         this.searchTodo(this.user._id);
     },
@@ -76,7 +78,7 @@ export default {
     }
 }
 </script>
-<style>
+<style lang="scss">
     .list-group-item{
         list-style: none;
         /*margin: 5px;
@@ -86,5 +88,11 @@ export default {
     .btn-group{
         float: right;
         /* vertical-align: middle; */
+    }
+    .scroll-area {
+    position: relative;
+    margin: auto;
+    width: 400px;
+    height: 300px;
     }
 </style>

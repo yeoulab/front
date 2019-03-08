@@ -1,9 +1,6 @@
 <template>
     <div id="todo-date" class="container">
         <!-- <b-form-input type="date" id ="todoDate" aira-invalid="true" v-model="stdDate" @change="refreshTodo"></b-form-input> -->
-        <br>
-        <h3>하루를 즐겁게!</h3>
-        <br>
         <el-date-picker v-model="stdDate" v-on:change="refreshTodo" type="date" ></el-date-picker>
     </div>
 </template>

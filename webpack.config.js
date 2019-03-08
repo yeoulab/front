@@ -46,15 +46,16 @@ module.exports = {
     devServer: {
         contentBase: './public/', // 웹서버 루트디렉토리
         //port: 8080,
-        historyApiFallback: true
+        historyApiFallback: true,
+        hot: true
     },
     externals: {
         // global app config object
         config: JSON.stringify({
-            //apiUrl: 'http://localhost:4000'
-            //apiUrl: 'http://34.85.37.150:4000'
-            //apiUrl: 'http://54.180.100.1:4000'
-            apiUrl: 'http://server.yeoulab.ml:4000'
+            apiUrl: 'http://localhost:4000'
+                //apiUrl: 'http://34.85.37.150:4000'
+                //apiUrl: 'http://54.180.100.1:4000'
+                //apiUrl: 'http://server.yeoulab.ml:4000'
         })
     }
 }

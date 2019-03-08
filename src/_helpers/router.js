@@ -7,18 +7,33 @@ import RegisterPage from '../register/RegisterPage'
 
 // new homepage
 import HomePageNew from '../home/HomePageNew'
-
 import FirstPage from '../home/FirstPage'
 
+// new tab
+import BottomMenu from '../home/BottomMenu'
+
+import CurrentTodos from '../home/todo/CurrentTodos'
+import TodoStatistic from '../home/todo/TodoStatistic'
+import InsertTodo from '../home/todo/InsertTodo'
 // router 에 대한 config
 Vue.use(Router);
 
 export const router = new Router({
     // mode: 'history',
-    routes: [
-        { path: '/home', component: HomePageNew }, // home 인 경우 Homepage vue 로 렌더링
+    routes: [{
+            path: '/home',
+            component: HomePageNew,
+            children: [{
+                path: 'current',
+                component: InsertTodo,
+            }, {
+                path: 'chart',
+                component: TodoStatistic
+            }]
+        }, // home 인 경우 Homepage vue 로 렌더링
         { path: '/login', component: LoginPage }, // login 인 경우 LoginPage Vue 로 렌더링
         { path: '/register', component: RegisterPage }, // register 인 경우 RegisterPage Vue 로 렌더링
+        { path: '/home2', component: BottomMenu },
         { path: '/', component: FirstPage },
         // otherwise redirect to home
         { path: '*', redirect: '/' }
@@ -32,7 +47,7 @@ router.beforeEach((to, from, next) => {
     // 존재 한다면, login 인증이 된것.
     const publicPages = ['/', '/login', '/register', '/home'];
     // 라우팅 하려는 vue 가 publicPage 에 포함이 되는지
-    const authRequired = !publicPages.includes(to.path);
+    // const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('user');
 
     // 첫 페이지로 이동 시, 로그인이 돼 있으면 home 으로 이동

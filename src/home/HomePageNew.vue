@@ -3,6 +3,17 @@
     <div class="topMenu">
       <TopMenu></TopMenu>
     </div>
+    <div class="main">
+      <router-view></router-view>
+    </div>
+    <div class="bottomMenu">
+      <BottomMenu 
+        v-on:goToCurrent="goToCurrent"
+        v-on:goToDone="goToDone"
+        v-on:goToChart="goToChart">
+      </BottomMenu>
+    </div>
+    <!--
     <div class="todo">
       <TodoDate></TodoDate>
       <GetTodo></GetTodo>
@@ -14,6 +25,7 @@
       <Confirm></Confirm>
       <br>
     </div>
+    -->
   </div>
 </template>
 <script>
@@ -25,6 +37,7 @@ import Confirm from './todo/Confirm.vue'
 import Navigation from './Navigation.vue'
 import TopMenu from './TopMenu.vue'
 import TodoStatistic from './todo/TodoStatistic.vue'
+import BottomMenu from './BottomMenu.vue'
 import { mapState } from 'vuex';
 
 export default {  
@@ -38,12 +51,27 @@ export default {
     Navigation,
     TopMenu,
     TodoStatistic,
+    BottomMenu,
+  },
+  created(){
+    this.$router.push("/home/current");
   },
   computed: {
     ...mapState({
       user: state => state.account.user,
     })
   },
+  methods: {
+    goToCurrent(){
+      this.$router.push("/home/current");
+    },
+    goToDone(){
+
+    },
+    goToChart(){
+      this.$router.push("/home/chart");
+    }
+  }
 }
 </script>
 <style>
@@ -55,6 +83,21 @@ export default {
   width: 100%;
   left: 0;
   top: 0%;
+}
+.main{
+  /* center align */
+  position: absoulte;
+  margin-top: 80px;
+  /* width: 80%; */
+  /* position: absolute; */
+  /* top: 150px; */
+}
+.bottomMenu{
+  position: absolute;
+  /* left: 0; */
+  bottom: 0;
+  width: 90%;
+  /* top: 100px; */
 }
 .todo{
   position:absolute;
