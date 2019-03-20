@@ -11,6 +11,9 @@
         <v-btn fab dark small color="pink">
                 <v-icon dark>settings</v-icon>
         </v-btn>
+        <v-btn dark small color="pink" v-on:click="logout">
+            로그아웃
+        </v-btn>
       </div>
         <!-- <p>Todo</p>
         <div v-on:click="logout">로그아웃</div> 
