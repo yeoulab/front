@@ -16,7 +16,4 @@ export default {
 }
 </script>
 <style>
-.insertTodo{
-  display: flex; 
-}
 </style>

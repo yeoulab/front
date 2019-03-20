@@ -66,7 +66,10 @@ export default {
     components: {
     },
     created() {
-        this.searchTodo(this.user._id);
+        // todos 에 없을 때만 조회한다.
+        if( this.todos.length == 0 ){
+            this.searchTodo(this.user._id);
+        }
     },
     methods: {
         ...mapActions('todos', {
@@ -87,7 +90,7 @@ export default {
     },
     computed: {
         ...mapState({
-            //todos: state => state.todos.todos,
+            // todos: state => state.todos.todos,
             user: state => state.account.user,
             todoDate: state => state.todos.todoDate,
         }),
@@ -99,10 +102,10 @@ export default {
 </script>
 <style>
 #current-todos{
-    height: 500px;
+    height: 400px;
 }
 #todo-list{
-    height:500px;
+    height:400px;
     overflow-y: auto;
 }
 #todo-card{

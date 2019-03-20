@@ -6,7 +6,7 @@
 import { todosService } from '../_services';
 import { commonFunc } from '../_helpers';
 
-var todoToday = new Date().toISOString().slice(0, 10);
+var todoToday = new Date().toISOString().slice(0, 10).replace(/-/gi, "");
 // const user = JSON.parse(localStorage.getItem('user'));
 
 const state = {
@@ -95,6 +95,8 @@ const mutations = {
     },
     COMPLETE_TODO(state, todo) {
         //todo.completed = true;
+        console.log("TodoDate : " + state.todoDate);
+        console.log(todo);
         state.completedTodos.push({
             todoName: todo.todoName,
             todoId: todo.todoId,
@@ -105,8 +107,10 @@ const mutations = {
             addYn: true,
             delYn: false,
         })
+        console.log(state);
     },
     REMOVE_COMPLETED_TODO_BY_ID(state, todo) {
+        console.log("REMOVE_COMPLETED_TODO_BY_ID");
         var afCompletedTodos = state.completedTodos;
         afCompletedTodos.splice(afCompletedTodos.indexOf(todo), 1);
         state.completedTodos = afCompletedTodos;
@@ -124,6 +128,7 @@ const mutations = {
     },
     SET_DATE(state, dt) {
         console.log(dt);
+
         state.todoDate = dt;
     },
     SET_USER(state, id) {
@@ -139,6 +144,7 @@ const actions = {
     // 타 vuex 의 값을 가져오기 위해서는 rootState 를 이용한다.
     searchTodo({ commit, rootState }) {
         let id = rootState.account.user._id;
+        state.userId = rootState.account.user._id;
 
         let todoById = {
                 todoName: '',
@@ -309,7 +315,8 @@ const actions = {
     // },
     setTodoDate({ commit }, dt) {
         console.log("dt : " + dt);
-        commit('SET_DATE', dt);
+        let today = dt.replace(/-/gi, "");
+        commit('SET_DATE', today);
     },
     confirmTodos({ dispatch, state }) {
         console.log("confirmTodos Start");;

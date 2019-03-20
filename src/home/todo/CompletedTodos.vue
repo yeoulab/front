@@ -1,18 +1,39 @@
 <template>
-    <div id="completed-todos" class="container">
-        <h6 v-if="completedTodos.length > 0">한 일({{completedTodos.length}})</h6>
-        <ul class="list-group">
-            <li class="list-group-item" v-for="todo in completedTodos" :key="todo.id">
-                {{todo.todoName}}
-                <div class="btn-group">
-                    <el-button v-on:click="rmCompletedTodo(todo)" type="danger" icon="el-icon-delete" circle></el-button>
-                    <!-- <button type="button" @click="rmCompletedTodo(todo)" class="btn btn-default btn-sm"> -->
-                    <!-- <span class="glyphicon glyphicon-remove-circle"></span> Remove -->
-                    <!-- </button> -->
-                </div>
-            </li>
-        </ul>
-</div>
+    <div id="completed-todos">
+        <v-layout row id="layout-top">
+            <v-card id="completed-card">
+                <v-toolbar color="pink" dark>
+                    <v-toolbar-title>한 일({{completedTodos.length}})</v-toolbar-title>
+                </v-toolbar>
+
+                <v-list id="completed-list">
+                    <template v-for="(todo, index) in completedTodos">
+                        <v-list-tile
+                        :key="todo.todoName"
+                        avatar
+                        ripple>
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ todo.todoName }}</v-list-tile-title>
+                            <!-- <v-list-tile-sub-title class="text--primary">{{ todo.todoName }}</v-list-tile-sub-title> -->
+                            <!-- <v-list-tile-sub-title>{{ todo.todoName }}</v-list-tile-sub-title> -->
+                        </v-list-tile-content>
+
+                        <v-list-tile-action>
+                            <v-btn fab dark small color="pink" v-on:click="rmCompletedTodo(todo)">
+                                <v-icon dark>delete_forever</v-icon>
+                            </v-btn>
+                        </v-list-tile-action>
+
+                        </v-list-tile>
+                        <v-divider
+                        v-if="index + 1 < completedTodos.length"
+                        :key="index"
+                        ></v-divider>
+                    </template>
+                </v-list>
+            </v-card>
+        </v-layout>           
+    </div>
 </template>
 <script>
     import {mapState, mapActions, mapGetters} from 'vuex';
@@ -57,13 +78,18 @@
     }
 </script>
 <style>
-    /* .list-group-item{
-        list-style: none;
-        margin: 0px;
-        padding: 0px;
+    #layout-top{
+        /* height: 400px; */
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
     }
-    .btn-group{
-        float: right;
-        vertical-align: middle;
-    } */
+    
+    #completed-list{
+        height:400px;
+        overflow-y: auto;
+    }
+    #completed-card{
+        width: 100%;
+    }
 </style>

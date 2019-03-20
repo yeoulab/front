@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="confirm-todo">
     <CompletedTodo></CompletedTodo>
     <Confirm></Confirm>
   </div>
@@ -16,4 +16,11 @@ export default{
 }
 </script>
 <style>
+#confirm-todo{
+  display: flex;
+  flex-direction: column;
+}
+CompletedTodo{
+  width: 500px;
+}
 </style>

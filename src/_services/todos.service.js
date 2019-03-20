@@ -29,9 +29,21 @@ function confirmAllData(param) {
     var completedTodos = param.completedTodos;
     var payload = { todos, completedTodos };
 
-    return axios.post(`${config.apiUrl}/todos/confirm`, payload)
-        .then().catch();
+    return new Promise((resolve, reject) => {
+        console.log("promise 안에 있음");
+        axios.post(`${config.apiUrl}/todos/confirm`, payload)
+            .then((res) => {
+                console.log("promise-res 안에 있음");
+                if (res) {
+                    console.log("promise-res-if 안에 있음");
+                    resolve(res);
+                }
+
+                reject(new Error("save failed"));
+            }).catch()
+    });
 }
+
 
 // token 을 어떻게 전역으로 관리할 수 있을까..
 function createTodo(todo) {
@@ -40,8 +52,18 @@ function createTodo(todo) {
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-    return axios.post(`${config.apiUrl}/todos/create`, { todo })
-        .then().catch();
+    return new Promise((resolve, reject) => {
+        axios.post(`${config.apiUrl}/todos/create`, { todo })
+            .then((res) => {
+                console.log(res);
+                if (res) {
+                    resolve(res);
+                }
+
+                reject(new Error("save failed"));
+            }).catch();
+    });
+
 }
 
 function removeTodo(todoId) {
