@@ -102,10 +102,10 @@ export default {
 </script>
 <style>
 #current-todos{
-    height: 400px;
+    height: 340px;
 }
 #todo-list{
-    height:400px;
+    height: 340px;
     overflow-y: auto;
 }
 #todo-card{
