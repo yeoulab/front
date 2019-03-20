@@ -1,26 +1,79 @@
 <template>
     <div id="current-todos" class="container">
-        <h6 v-if="todos.length > 0">할 일({{todos.length}})</h6>
+        <!-- <h6 v-if="todos.length > 0">할 일({{todos.length}})</h6>
         <ul class="list-group">
             <li class="list-group-item" v-for="todo in todos" :key="todo.id">
                 {{todo.todoName}}
                 <div class="btn-group">
-                    <!--
-                    <button type="button" @click="edit(todo)" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-edit"></span> Edit
-                    </button>
-                    -->
                     <el-button v-on:click="completeTodo(todo)" type="success" icon="el-icon-check" circle></el-button>
-                    <!-- <button type="button" @click="completeTodo(todo)" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-ok-circle"></span> Complete
-                    </button> -->
                     <el-button v-on:click="remove(todo)" type="danger" icon="el-icon-delete" circle></el-button>
-                    <!-- <button type="button" @click="remove(todo)" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-remove-circle"></span> Remove
-                    </button> -->
                 </div>
             </li>
-        </ul>
+        </ul> -->
+        <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+            <v-card>
+                <v-toolbar color="green" dark>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title>할 일({{todos.length}})</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                    <v-icon>search</v-icon>
+                </v-btn>
+                <v-btn icon>
+                    <v-icon>check_circle</v-icon>
+                </v-btn>
+                </v-toolbar>
+
+                <v-list two-line>
+                <template v-for="(todo, index) in todos">
+                    <v-list-tile
+                    :key="todo.todoName"
+                    avatar
+                    ripple>
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{ todo.todoName }}</v-list-tile-title>
+                        <!-- <v-list-tile-sub-title class="text--primary">{{ todo.todoName }}</v-list-tile-sub-title> -->
+                        <!-- <v-list-tile-sub-title>{{ todo.todoName }}</v-list-tile-sub-title> -->
+                    </v-list-tile-content>
+
+                    <v-list-tile-action>
+                        <v-list-tile-action-text>click here</v-list-tile-action-text>
+                        <v-layout row>
+                            <v-btn icon ripple v-on:click="completeTodo(todo)">
+                                <v-icon>done_outline</v-icon>
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn icon ripple v-on:click="remove(todo)">
+                                <v-icon>remove_circle_outline</v-icon>
+                            </v-btn>
+                        </v-layout>
+                        
+                        <!-- <v-icon
+                        v-if="selected.indexOf(index) < 0"
+                        color="grey lighten-1"
+                        >
+                        done_outline
+                        </v-icon>
+
+                        <v-icon
+                        v-else
+                        color="yellow darken-2"
+                        >
+                        done_outline
+                        </v-icon> -->
+                    </v-list-tile-action>
+
+                    </v-list-tile>
+                    <v-divider
+                    v-if="index + 1 < todos.length"
+                    :key="index"
+                    ></v-divider>
+                </template>
+                </v-list>
+            </v-card>
+            </v-flex>
+        </v-layout>        
     </div>
 </template>
 <script>
@@ -41,7 +94,8 @@ export default {
                 userId: '',
                 todoId: '',
                 guid: '',
-            }
+            },
+            selected: [2],
         }
     },
     components: {

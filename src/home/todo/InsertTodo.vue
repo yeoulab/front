@@ -1,8 +1,8 @@
 <template>
   <div>
-    <TodoDate></TodoDate>
     <GetTodo></GetTodo>
     <CurrentTodos></CurrentTodos>
+    <TodoDate></TodoDate>
   </div>
 </template>
 <script>
@@ -18,3 +18,6 @@ export default {
   }
 }
 </script>
+<style>
+
+</style>

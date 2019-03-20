@@ -136,9 +136,9 @@ const actions = {
         commit('GET_TODO', todo)
     },
     // 조회하기
-    searchTodo({ commit }, id) {
-
-        commit('SET_USER', id);
+    // 타 vuex 의 값을 가져오기 위해서는 rootState 를 이용한다.
+    searchTodo({ commit, rootState }) {
+        let id = rootState.account.user._id;
 
         let todoById = {
                 todoName: '',

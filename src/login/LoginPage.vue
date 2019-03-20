@@ -1,69 +1,66 @@
 <template>
-    <div class="login">
-        <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
-        <h4 align="center">로그인</h4>
-        <div class="input-id">
-            <div>
-                <label for="inputFormatter">이메일</label>
+    <div class="wrap-login">
+        <div class="login">
+            <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
+            <h4 align="center">로그인</h4>
+            <div id="input-id">
+                <!-- <div>
+                    <label for="inputFormatter">이메일</label>
+                </div>
+                <div>
+                    <el-input type="email" v-model="email" v-validate="'required'" placeholder="Enter your e-mail"></el-input>
+                </div> -->
+                <v-text-field 
+                v-model="email" 
+                label="이메일" 
+                required>
+                </v-text-field>
             </div>
-            <div>
-                <el-input type="email" v-model="email" v-validate="'required'" placeholder="Enter your e-mail"></el-input>
+            <div id="input-pwd">
+                <!-- <div>
+                    <label for="inputFormatter">비밀번호</label>
+                </div>
+                <div>
+                    <el-input type="password" v-model="password" v-on:keyup.enter="user_login" placeholder="Password" required></el-input>
+                </div> -->
+                <v-text-field
+                    :append-icon="show3 ? 'visibility' : 'visibility_off'"
+                    :type="show3 ? 'text' : 'password'"
+                    name="input-10-2"
+                    label="Not visible"
+                    v-model="password"
+                    class="input-group--focused"
+                    placeholder="비밀번호"
+                    @click:append="show3 = !show3"
+                    v-on:keyup.enter="user_login"
+                ></v-text-field>            
             </div>
-        </div>
-        <div class="input-pwd">
-            <div>
-                <label for="inputFormatter">비밀번호</label>
+            <div id="checkbox">
+                <label>
+                    <input type="checkbox" v-model="idcheck" value="remember-me"> Remember me
+                </label>
             </div>
-        <!-- <input type="password" v-model="password" name="password" class="form-control" v-on:keyup.enter="user_login" placeholder="Password" required> -->
-            <div>
-                <el-input type="password" v-model="password" v-on:keyup.enter="user_login" placeholder="Password" required></el-input>
+            <div id="user-btn">
+                <v-btn v-on:click="user_login" outline color="pink" block>로그인</v-btn>
             </div>
-        </div>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" v-model="idcheck" value="remember-me"> Remember me
-            </label>
-        </div>
-        <div class="user-btn">
-            <el-button v-on:click="user_login">Sign in</el-button>
-            <el-button v-on:click="onRegister">회원가입</el-button>
-            <el-button>비밀번호 찾기</el-button>
-        </div>
-        <p></p>
-        <div>
-        </div>
-        <!-- <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="user_login">Sign in</button> -->
-        <p></p>
-        <el-row>
-            <el-col :span="60">
+            <div id="account-btn">
+                <a id="reg_txt" href="#" v-on:click="onRegister" outline color="pink">회원가입</a>
+                <a id="find_pwd" href="#">비밀번호 찾기</a>
+                <!--<v-btn v-on:click="onRegister" outline color="pink">회원가입</v-btn>
+                <v-btn outline color="pink">비밀번호 찾기</v-btn>-->
+            </div>
+            <div id="sns-button">
                 <div class="naver-btn">
                     <a v-bind:href="getNaverBtn"><img height='44' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>
                 </div>
-            </el-col>
-            <el-col :span="60">
                 <div class="google-btn" v-on:click="handleSignInClick()" >
                     <div  class="google-icon-wrapper" >
                         <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" >
                     </div>
                     <p class="btn-text" >Sign in with google</p>
                 </div>
-            </el-col>
-        </el-row>
-        <!-- <div> -->
-            <!-- <button v-on:click="naverlogin" >naver</button> -->
-            <!-- <a href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://localhost:4000/social/naverCallback&state='><img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a> -->
-            
-        <!-- </div> -->
-        <!-- <div class="body" align="center">
-            <a @click="handleSignInClick()">
-                <img src="https://s3.ap-northeast-2.amazonaws.com/diary-image/btn_google_signin_light_normal_web.png">
-            </a>
+            </div>
         </div>
-        <p></p>
-        <div class="footer" align="center">
-            <router-link to="/register" class="btn btn-link">회원가입</router-link>
-            <router-link to="/register" class="btn btn-link">아이디찾기</router-link>
-        </div> -->
     </div>
 </template>
 
@@ -251,59 +248,57 @@ export default {
 </script>
 <style lang="scss">
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
+.wrap-login{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+}
+
 h4{
    font-family: 'Malgun Gothic', sans-serif;
    text-align: center;
    font-weight: bold;
 }
 
-.login{
-  position:absolute;
-//   top: 50px;
-//   left: 50px;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%)
+#user-btn{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid indigo;
 }
 
-// .el-input{
-//     width: 329px;
-// }
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+#account-btn{
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
-.button1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
+#account-btn #reg_txt{
+    padding-right: 10px;
 }
 
-.el-row {
-    margin-bottom: 50px;
-    &:last-child {
-        margin-bottom: 0;
-    }
+#sns-button{
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+}
+
+#sns-button google-btn{
+    flex-shrink: 0;
 }
 
 $white: #fff;
 $google-blue: #4285f4;
 $button-active-blue: #1669F2;
 
-.user-btn{
-    width: 400px;
-}
-
 .naver-btn{
-    width: 145px;
+    padding-right: 10px;
 }
 
 .google-btn {

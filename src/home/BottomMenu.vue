@@ -1,11 +1,11 @@
 <template>
-  <v-card height="50px" flat>
+<!-- 아이콘 확인은 https://material.io 에서 -->
+  <!-- <v-card height="50px" flat> -->
     <v-bottom-nav
       :active.sync="bottomNav"
       :value="true"
-      absolute
       color="transparent"
-      shift
+      fixed
     >
       <v-btn
         color="teal"
@@ -13,8 +13,8 @@
         value="recent"
         v-on:click="goToCurrent"
       >
-        <span>Recent</span>
-        <v-icon>history</v-icon>
+        <span>할 일</span>
+        <v-icon>playlist_add</v-icon>
       </v-btn>
 
       <v-btn
@@ -23,8 +23,8 @@
         value="favorites"
         v-on:click="goToDone"
       >
-        <span>Favorites</span>
-        <v-icon>favorite</v-icon>
+        <span>한 일</span>
+        <v-icon>done_outline</v-icon>
       </v-btn>
 
       <v-btn
@@ -33,11 +33,11 @@
         value="nearby"
         v-on:click="goToChart"
       >
-        <span>Chart</span>
-        <v-icon>place</v-icon>
+        <span>통계</span>
+        <v-icon>bar_chart</v-icon>
       </v-btn>
     </v-bottom-nav>
-  </v-card>
+  <!-- </v-card> -->
 </template>
 </template>
 <script>

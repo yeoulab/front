@@ -59,6 +59,7 @@ function getUserToken() {
 
 function getByUserId(id) {
     console.log("getByUserId Start")
+    console.log("id는 : " + id);
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     return axios.get(`${config.apiUrl}/todos/${id}`)
@@ -90,7 +91,7 @@ function getCompleteByUserId(id, dt) {
     console.log("getCompleteByUserId");
     token = getUserToken();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-    // dt = dt.replace(/-/gi, "");
+    dt = dt.replace(/-/gi, "");
 
     return axios.get(`${config.apiUrl}/complete/${id}/${dt}`)
         .then((response) => {

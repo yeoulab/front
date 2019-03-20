@@ -1,14 +1,7 @@
 <template>
-  <div class="circular" >
-    <!-- <Navigation></Navigation>-->
-    <div class="container"><!--
-        <div class="row">
-            <div class="col-sm-6 offset-sm-3"> -->
-                <router-view></router-view>
-            <!-- </div>
-        </div>-->
+    <div class="container">
+        <router-view></router-view>
     </div>
-  </div>
 </template>
 
 <script>
@@ -47,3 +40,9 @@ export default {
     } 
 };
 </script>
+<style>
+    .container {
+        height: 100%;
+    }
+
+</style>

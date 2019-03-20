@@ -1,8 +1,7 @@
 <template>
     <div class="layer">
-        <!-- <b-button to="/login">로그인으로...</b-button> -->
-        <el-button v-on:click="onLogin">로그인</el-button>
-        <el-button v-on:click="onRegister">회원가입</el-button>
+        <v-btn v-on:click="onLogin" outline color="pink">로그인</v-btn>
+        <v-btn v-on:click="onRegister" outline color="pink">회원가입</v-btn>
     </div>
 </template>
 <script>
@@ -20,9 +19,12 @@ export default{
 </script>
 <style>
 .layer{
-  position:absolute;
+  /* position:absolute;
   top:50%;
   left:50%;
-  transform:translate(-50%, -50%)
+  transform:translate(-50%, -50%) */
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
 }
 </style>

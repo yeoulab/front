@@ -15,6 +15,7 @@ import BottomMenu from '../home/BottomMenu'
 import CurrentTodos from '../home/todo/CurrentTodos'
 import TodoStatistic from '../home/todo/TodoStatistic'
 import InsertTodo from '../home/todo/InsertTodo'
+import ConfirmTodos from '../home/todo/ConfirmTodos'
 // router 에 대한 config
 Vue.use(Router);
 
@@ -29,6 +30,9 @@ export const router = new Router({
             }, {
                 path: 'chart',
                 component: TodoStatistic
+            }, {
+                path: 'complete',
+                component: ConfirmTodos,
             }]
         }, // home 인 경우 Homepage vue 로 렌더링
         { path: '/login', component: LoginPage }, // login 인 경우 LoginPage Vue 로 렌더링
