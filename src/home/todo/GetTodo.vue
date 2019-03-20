@@ -1,12 +1,10 @@
 <template>
-    <div id="get-todo" class="container">
+    <div id="get-todo">
         <!-- :value 를 쓸 경우, computed 의 ...mapState 를 설정해주면 됨 
              v-model 은 get/set 이 있어야 함 -->
-        <v-form>
+        <!-- <v-form>
             <v-container>
             <v-layout row wrap>
-
-                <!-- <v-flex xs12> -->
                 <v-text-field
                     v-model="newTodo"
                     box
@@ -22,15 +20,18 @@
                 <v-btn fab dark small color="indigo" v-on:click="addTodo">
                     <v-icon dark>add</v-icon>
                 </v-btn>
-                <!-- </v-flex> -->
             </v-layout>
             </v-container>
-        </v-form>
-        <!-- <div>
-            <el-input v-model="newTodo">                
-            </el-input>
-            <el-button v-on:click="addTodo" type="primary" icon="el-icon-edit" circle></el-button>
-        </div> -->
+        </v-form> -->
+          <v-text-field
+            label="할 일"
+            outline
+            color='pink'
+            v-model="newTodo"
+          ></v-text-field>
+          <v-btn fab dark small color="pink" v-on:click="addTodo">
+                <v-icon dark>add</v-icon>
+          </v-btn>
     </div>
 </template>
 <script>
@@ -119,4 +120,9 @@
 /* input {
   font-family: "Courier New", Times, serif;
 } */
+#get-todo{
+    display: flex;
+    height: 100px;
+    padding: 10px 0 0 0;
+}
 </style>

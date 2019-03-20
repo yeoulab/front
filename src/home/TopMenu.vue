@@ -1,16 +1,31 @@
 <template>
     <div class="topMenu">
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <div id="tab-name">
+        <h2>{{ tabName }}</h2>
+      </div>
+      <v-spacer></v-spacer>
+      <div id="top-button">
+        <v-btn fab dark small color="pink">
+                <v-icon dark>search</v-icon>
+        </v-btn>
+        <v-btn fab dark small color="pink">
+                <v-icon dark>settings</v-icon>
+        </v-btn>
+      </div>
+        <!-- <p>Todo</p>
+        <div v-on:click="logout">로그아웃</div> 
+        
+        <!-- <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="0"><i class="el-icon-menu" v-on:click="check()"></i></el-menu-item>
         <el-menu-item index="1">Todo 관리</el-menu-item>
         <el-menu-item index="2" disabled>山愛커플</el-menu-item>
         <!-- <el-menu-item index="3" disabled>피카소 Shin</el-menu-item>
         <el-menu-item index="4" disabled></el-menu-item> -->
-        <el-submenu index="5" align="right">
+        <!-- <el-submenu index="5" align="right">
           <template slot=title>요! {{ this.user.username }} 님</template>
           <el-menu-item index="5-1">회원정보</el-menu-item>
           <el-menu-item index="5-2">로그아웃</el-menu-item>
-        </el-submenu>
+        </el-submenu> -->
 
         <!-- <el-submenu index="2">
             <template slot="title">Workspace</template>
@@ -26,7 +41,7 @@
         </el-submenu> -->
         <!-- <el-menu-item index="3" disabled>Info</el-menu-item>
         <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item> -->
-        </el-menu>
+        <!-- </el-menu> -->
     </div>
 </template>
 <script>
@@ -35,6 +50,7 @@ import { mapState } from 'vuex';
 export default{
     data() {
       return {
+        tabName: 'Todo 입력',
         activeIndex: '1',
         items: [
         'All', 'Family', 'Friends', 'Coworkers'
@@ -50,6 +66,9 @@ export default{
             console.log("DDDD");
             this.$router.push({path:'/login'});
         }
+      },
+      logout(e){
+        this.$router.push({path:'/login'});
       }
     },
     computed: {
@@ -60,5 +79,8 @@ export default{
 }
 </script>
 <style>
-
+.topMenu{
+  display: flex;
+  border-bottom: 1px groove pink;
+}
 </style>

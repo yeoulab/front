@@ -1,78 +1,43 @@
 <template>
     <div id="current-todos" class="container">
-        <!-- <h6 v-if="todos.length > 0">할 일({{todos.length}})</h6>
-        <ul class="list-group">
-            <li class="list-group-item" v-for="todo in todos" :key="todo.id">
-                {{todo.todoName}}
-                <div class="btn-group">
-                    <el-button v-on:click="completeTodo(todo)" type="success" icon="el-icon-check" circle></el-button>
-                    <el-button v-on:click="remove(todo)" type="danger" icon="el-icon-delete" circle></el-button>
-                </div>
-            </li>
-        </ul> -->
         <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
-            <v-card>
-                <v-toolbar color="green" dark>
-                <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>할 일({{todos.length}})</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-btn icon>
-                    <v-icon>search</v-icon>
-                </v-btn>
-                <v-btn icon>
-                    <v-icon>check_circle</v-icon>
-                </v-btn>
+            <v-card id="todo-card">
+                <v-toolbar color="pink" dark>
+                    <v-toolbar-title>할 일({{todos.length}})</v-toolbar-title>
                 </v-toolbar>
 
-                <v-list two-line>
-                <template v-for="(todo, index) in todos">
-                    <v-list-tile
-                    :key="todo.todoName"
-                    avatar
-                    ripple>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ todo.todoName }}</v-list-tile-title>
-                        <!-- <v-list-tile-sub-title class="text--primary">{{ todo.todoName }}</v-list-tile-sub-title> -->
-                        <!-- <v-list-tile-sub-title>{{ todo.todoName }}</v-list-tile-sub-title> -->
-                    </v-list-tile-content>
+                <v-list id="todo-list">
+                    <template v-for="(todo, index) in todos">
+                        <v-list-tile
+                        :key="todo.todoName"
+                        avatar
+                        ripple>
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ todo.todoName }}</v-list-tile-title>
+                            <!-- <v-list-tile-sub-title class="text--primary">{{ todo.todoName }}</v-list-tile-sub-title> -->
+                            <!-- <v-list-tile-sub-title>{{ todo.todoName }}</v-list-tile-sub-title> -->
+                        </v-list-tile-content>
 
-                    <v-list-tile-action>
-                        <v-list-tile-action-text>click here</v-list-tile-action-text>
-                        <v-layout row>
-                            <v-btn icon ripple v-on:click="completeTodo(todo)">
-                                <v-icon>done_outline</v-icon>
-                            </v-btn>
-                            <v-spacer></v-spacer>
-                            <v-btn icon ripple v-on:click="remove(todo)">
-                                <v-icon>remove_circle_outline</v-icon>
-                            </v-btn>
-                        </v-layout>
-                        
-                        <!-- <v-icon
-                        v-if="selected.indexOf(index) < 0"
-                        color="grey lighten-1"
-                        >
-                        done_outline
-                        </v-icon>
+                        <v-list-tile-action>
+                            <v-layout row>
+                                <v-btn fab dark small color="pink" v-on:click="completeTodo(todo)">
+                                    <v-icon dark>done_outline</v-icon>
+                                </v-btn>
+                                <v-spacer></v-spacer>
+                                <v-btn fab dark small color="pink" v-on:click="remove(todo)">
+                                    <v-icon dark>remove_circle_outline</v-icon>
+                                </v-btn>
+                            </v-layout>
+                        </v-list-tile-action>
 
-                        <v-icon
-                        v-else
-                        color="yellow darken-2"
-                        >
-                        done_outline
-                        </v-icon> -->
-                    </v-list-tile-action>
-
-                    </v-list-tile>
-                    <v-divider
-                    v-if="index + 1 < todos.length"
-                    :key="index"
-                    ></v-divider>
-                </template>
+                        </v-list-tile>
+                        <v-divider
+                        v-if="index + 1 < todos.length"
+                        :key="index"
+                        ></v-divider>
+                    </template>
                 </v-list>
             </v-card>
-            </v-flex>
         </v-layout>        
     </div>
 </template>
@@ -133,4 +98,14 @@ export default {
 }
 </script>
 <style>
+#current-todos{
+    height: 500px;
+}
+#todo-list{
+    height:500px;
+    overflow-y: auto;
+}
+#todo-card{
+    width: 100%;
+}
 </style>
