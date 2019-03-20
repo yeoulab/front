@@ -132,21 +132,5 @@ export default {
     }
 }
 </script>
-<style lang="scss">
-    .list-group-item{
-        list-style: none;
-        /*margin: 5px;
-        padding: 5px; */
-        vertical-align: middle;
-    }
-    .btn-group{
-        float: right;
-        /* vertical-align: middle; */
-    }
-    .scroll-area {
-    position: relative;
-    margin: auto;
-    width: 400px;
-    height: 300px;
-    }
+<style>
 </style>

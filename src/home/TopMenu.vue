@@ -36,6 +36,9 @@ export default{
     data() {
       return {
         activeIndex: '1',
+        items: [
+        'All', 'Family', 'Friends', 'Coworkers'
+      ]
       };
     },
     methods: {

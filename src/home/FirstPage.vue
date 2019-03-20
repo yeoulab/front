@@ -1,7 +1,9 @@
 <template>
-    <div class="layer">
-        <v-btn v-on:click="onLogin" outline color="pink">로그인</v-btn>
-        <v-btn v-on:click="onRegister" outline color="pink">회원가입</v-btn>
+    <div class="wrap-first">
+        <div class="layer">
+            <v-btn v-on:click="onLogin" outline color="pink">로그인</v-btn>
+            <v-btn v-on:click="onRegister" outline color="pink">회원가입</v-btn>
+        </div>
     </div>
 </template>
 <script>
@@ -18,13 +20,11 @@ export default{
 }
 </script>
 <style>
-.layer{
-  /* position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%) */
-  display: flex;
-  /* flex-direction: column; */
-  justify-content: center;
+
+.wrap-first{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

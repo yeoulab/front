@@ -44,7 +44,7 @@
                 <v-btn v-on:click="user_login" outline color="pink" block>로그인</v-btn>
             </div>
             <div id="account-btn">
-                <a id="reg_txt" href="#" v-on:click="onRegister" outline color="pink">회원가입</a>
+                <a id="reg_txt" href="#/register" v-on:click="onRegister" outline color="pink">회원가입</a>
                 <a id="find_pwd" href="#">비밀번호 찾기</a>
                 <!--<v-btn v-on:click="onRegister" outline color="pink">회원가입</v-btn>
                 <v-btn outline color="pink">비밀번호 찾기</v-btn>-->
@@ -270,7 +270,7 @@ h4{
 #user-btn{
     padding-top: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid indigo;
+    border-bottom: 1px dotted pink;
 }
 
 #account-btn{

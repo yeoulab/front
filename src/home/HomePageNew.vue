@@ -1,18 +1,19 @@
 <template>
   <div class="todoList">
-    <div class="topMenu">
+    <header>
       <TopMenu></TopMenu>
-    </div>
-    <div class="main">
+    </header>
+    <section class="main">
       <router-view></router-view>
-    </div>
-    <div class="bottomMenu">
-      <BottomMenu 
+    </section>
+    <footer>
+      푸터
+      <!-- <BottomMenu 
         v-on:goToCurrent="goToCurrent"
         v-on:goToDone="goToDone"
         v-on:goToChart="goToChart">
-      </BottomMenu>
-    </div>
+      </BottomMenu> -->
+    </footer>
   </div>
 </template>
 <script>
@@ -62,4 +63,17 @@ export default {
 }
 </script>
 <style>
+/* .todoList{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} */
+header{
+  align-content: stretch;
+  border-bottom: 1px solid gray;
+}
+.main{
+  display: flex;
+  flex-direction: column;
+}
 </style>
