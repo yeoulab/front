@@ -28,8 +28,8 @@ export const router = new Router({
                 path: 'current',
                 component: InsertTodo,
             }, {
-                path: 'chart',
-                component: TodoStatistic
+                path: 'calendar',
+                component: TodoStatistic,
             }, {
                 path: 'complete',
                 component: ConfirmTodos,

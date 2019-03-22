@@ -56,7 +56,7 @@ export default {
       this.$router.push("/home/complete");
     },
     goToChart(){
-      this.$router.push("/home/chart");
+      this.$router.push("/home/calendar");
     }
   }
 }

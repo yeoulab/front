@@ -1,18 +1,18 @@
 import Vue from 'vue';
 import VeeValidate from 'vee-validate';
-import ElementUI from 'element-ui';
+// import ElementUI from 'element-ui';
 // import './element-variables.scss'
 
 import { store } from './_store';
 import { router } from './_helpers';
 import App from './app/App';
-import BootstrapVue from 'bootstrap-vue'
+// import BootstrapVue from 'bootstrap-vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(VeeValidate);
-Vue.use(BootstrapVue);
-Vue.use(ElementUI);
+// Vue.use(BootstrapVue);
+// Vue.use(ElementUI);
 var VueCookie = require('vue-cookie');
 Vue.use(VueCookie);
 Vue.use(Vuetify);

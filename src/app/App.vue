@@ -8,6 +8,13 @@
 import { mapState, mapActions } from 'vuex'
 import Navigation from '../home/Navigation.vue'
 import FirstPage from '../home/FirstPage.vue'
+import 'core-js/es6/date';
+import 'core-js/es6/array';
+import 'core-js/es7/array';
+import 'core-js/es6/regexp';
+import 'core-js/es6/map';
+import 'core-js/es6/weak-map';
+import 'core-js/es6/set';
 
 export default {
     name: 'app',
