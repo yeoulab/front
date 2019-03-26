@@ -1,57 +1,62 @@
 <template>
-  <div id="chart">
-      <div id="calendar">
-        <v-sheet height="50">
-          <v-calendar
-            ref="calendar"
-            v-model="start"
-            :now="start"
-            :type="type"
-            color="primary"
-          >
-            <template v-slot:day="{ present, past, date }">
-              <v-layout fill-height>
-                <template>
-                  <v-sheet
-                    v-for="(percent, i) in tracked[date]"
-                    :key="i"
-                    :title="category[i]"
-                    :color="colors[i]"
-                    :width="`${percent}%`"
-                    height="100%"
-                    tile
-                  ></v-sheet>
-                </template>
-              </v-layout>
-            </template>
-          </v-calendar>
-        </v-sheet>
-      </div>
-      <div id="cal-btn">
-        <div id="prev-btn">
-          <v-btn @click="$refs.calendar.prev()">
-            <v-icon
-              dark
-              left
-            >
-              keyboard_arrow_left
-            </v-icon>
-            Prev
-          </v-btn>
-        </div>
-        <div id="next-btn">
-          <v-btn @click="$refs.calendar.next()">
-            Next
-            <v-icon
-              right
-              dark
-            >
-              keyboard_arrow_right
-            </v-icon>
-          </v-btn>
-        </div>
-      </div>
-  </div>
+<v-layout wrap>
+    <v-flex
+      xs12
+      class="mb-3"
+    >
+      <v-sheet height="450">
+        <v-calendar
+          ref="calendar"
+          v-model="start"
+          :type="type"
+          :end="end"
+          color="primary"
+        >
+          <template v-slot:day="{ present, past, date }">
+            <v-layout>
+              <template v-if="past && tracked[date]">
+                <b>{{ tracked[date] }} 건</b>
+                <v-btn fab dark small color="pink">
+                  <v-icon dark>search</v-icon>
+                </v-btn>
+              </template>
+            </v-layout>
+          </template>
+        </v-calendar>
+      </v-sheet>
+    </v-flex>
+
+    <v-flex
+      sm4
+      xs12
+      class="text-sm-left text-xs-center"
+    >
+      <v-btn @click="$refs.calendar.prev()">
+        <v-icon
+          dark
+          left
+        >
+          keyboard_arrow_left
+        </v-icon>
+        Prev
+      </v-btn>
+    </v-flex>
+    <v-flex
+      sm4
+      xs12
+      class="text-sm-right text-xs-center"
+    >
+      <v-btn @click="$refs.calendar.next()">
+        Next
+        <v-icon
+          right
+          dark
+        >
+          keyboard_arrow_right
+        </v-icon>
+      </v-btn>
+    </v-flex>
+  </v-layout>
 
 </template>
 <script>
@@ -64,15 +69,17 @@ export default{
         type: 'month',
         start: new Date().toISOString().slice(0, 10),
         tracked: {
-          '2019-03-09': [23, 45, 10],
-          '2019-03-08': [10],
-          '2019-03-07': [0, 78, 5],
-          '2019-03-06': [0, 0, 50],
-          '2019-03-05': [0, 10, 23],
-          '2019-03-04': [2, 90],
-          '2019-03-03': [10, 32],
-          '2019-03-02': [80, 10, 10],
-          '2019-03-01': [20, 25, 10]
+          '2019-03-09': 5,
+          '2019-03-08': 6,
+          // '2019-03-09': [23, 45, 10],
+          // '2019-03-08': [10],
+          // '2019-03-07': [0, 78, 5],
+          // '2019-03-06': [0, 0, 50],
+          // '2019-03-05': [0, 10, 23],
+          // '2019-03-04': [2, 90],
+          // '2019-03-03': [10, 32],
+          // '2019-03-02': [80, 10, 10],
+          // '2019-03-01': [20, 25, 10]
         },
         colors: ['#1867c0', '#fb8c00', '#000000'],
         category: ['Development', 'Meetings', 'Slacking']

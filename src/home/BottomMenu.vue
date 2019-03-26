@@ -4,11 +4,12 @@
     <v-bottom-nav
       :active.sync="bottomNav"
       :value="true"
-      color="transparent"      
+      color="pink"
       fixed
+      dark
     >
       <v-btn
-        color="pink"
+        color="white"
         flat
         value="recent"
         v-on:click="goToCurrent"
@@ -18,7 +19,7 @@
       </v-btn>
 
       <v-btn
-        color="pink"
+        color="white"
         flat
         value="favorites"
         v-on:click="goToDone"
@@ -28,7 +29,7 @@
       </v-btn>
 
       <v-btn
-        color="pink"
+        color="white"
         flat
         value="nearby"
         v-on:click="goToChart"
