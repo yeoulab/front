@@ -1,0 +1,26 @@
+FROM node:10.18.1-alpine3.10
+# vuejs build
+WORKDIR /app
+COPY /front/package*.json ./
+RUN npm install
+COPY /front .
+RUN npm run build
+
+# nginx install and setting configuration
+RUN apk update && apk add nginx && mkdir -p /run/nginx
+COPY /front/public /var/lib/nginx/html
+COPY default.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+STOPSIGNAL SIGTERM
+
+# nodejs build
+WORKDIR /usr/src/app
+COPY ./server/package*.json ./
+RUN npm install
+COPY ./server .
+
+# start shell
+WORKDIR /etc/init.d
+ADD start.sh /
+RUN chmod +x /start.sh
+CMD ["/start.sh"]
