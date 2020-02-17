@@ -97,7 +97,7 @@ export default {
             //         + host
             //         + '/#/login&state=yeoulab';
 
-            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://yeoulab.ml/server/social/naverGetCode&state=login';
+            var naverBtn = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=gGeZ9i_jrqofbACc0C6q&redirect_uri=http://yeoulab.ga/server/social/naverGetCode&state=login';
                     
             return naverBtn;
         }
